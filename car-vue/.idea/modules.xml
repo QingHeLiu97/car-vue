@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/javaproject-master/project.iml" filepath="$PROJECT_DIR$/javaproject-master/project.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/毕业设计.iml" filepath="$PROJECT_DIR$/.idea/毕业设计.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/carrental-vue.iml" filepath="$PROJECT_DIR$/.idea/carrental-vue.iml" />
     </modules>
   </component>
 </project>

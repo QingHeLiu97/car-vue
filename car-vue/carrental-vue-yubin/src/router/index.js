@@ -51,20 +51,4 @@ router.beforeEach((to, form, next) => {
     next()
   }
 });
-
-// 路由跳转之后
-// router.afterEach((to,form) => {
-
-// });
-
-// 路由跳转报错处理
-// router.onError((error) => {
-//   const pattern = /Loading chunk (\d)+ failed/g;
-//   const isChunkLoadFailed = error.message.match(pattern);
-//   const targetPath = router.history.pending.fullPath;
-//   if (isChunkLoadFailed) {
-//     router.replace(targetPath);
-//   }
-// });
-
 export default router

@@ -4,8 +4,7 @@ import custom from './modules/custom'
 import system from './modules/system'
 import servicing from './modules/servicing'
 import contribution from './modules/contribution'
-// 在框架内的路由
-const frameIn = [
+const loginIn = [
     {
       path: '/',
       name: 'root',
@@ -36,15 +35,14 @@ const frameIn = [
 
 ]
 
-// 在框架外的路由
-const frameOut = [
+const loginOut = [
     {
       path: '/login',
       name: 'login',
       meta: {
         title: '登录'
       },
-      component: () => import('@view/account/login')
+      component: () => import('@view/common/login')
     }
 ]
 
@@ -74,7 +72,7 @@ const errorPage = [
 ]
 
 export default [
-    ...frameIn,
-    ...frameOut,
+    ...loginIn,
+    ...loginOut,
     ...errorPage
 ]
