@@ -1,19 +1,19 @@
-import custom from './modules/custom'
-import admin from './modules/admin'
-import superAdmin from './modules/superAdmin.js'
+import user from './modules/user.js'
+import admin from './modules/admin.js'
+import superAdmin from  './modules/superAdmin.js'
 export default [
     {
         id: 'home',
         path: '/home',
         icon: 'el-icon-s-home',
-        role: 'custom',
+        role: 'user',
         name: '首页'
     },
 	{
 	    id: 'home',
 	    path: '/home',
 	    icon: 'el-icon-s-home',
-	    role: 'superAdmin',
+	    role: 'super',
 	    name: '首页'
 	},
     {
@@ -23,7 +23,7 @@ export default [
         role: 'admin',
         name: '首页'
     },
-	...superAdmin,
-    ...custom,
-    ...admin
+    ...admin,
+    ...superAdmin,
+    ...user
 ]

@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-aside width="220px">
-      <div class="a-aside-title">金象社区</div>
+      <div class="a-aside-title">汽车租赁管理</div>
       <Aside></Aside>
     </el-aside>
     <el-container>

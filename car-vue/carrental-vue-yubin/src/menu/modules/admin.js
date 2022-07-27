@@ -1,31 +1,31 @@
 export default [
     {
-        id: 'custom',
-        path: '/custom/list',
-        name: '业主管理',
+        id: 'admin-user',
+        path: '/admin/user',
+        name: '用户管理',
         role: 'admin',
-        icon: 'el-icon-s-custom'
+        icon: 'el-icon-s-solid'
     },
     {
-        id: 'servicing-list',
-        path: '/servicing/list',
-        name: '报修管理',
+        id: 'admin-car',
+        path: '/admin/car',
+        name: '汽车管理',
         role: 'admin',
         icon: 'el-icon-s-cooperation'
     },
     {
-        id: 'admin-notice',
-        path: '/admin/notice',
-        icon: 'el-icon-message-solid',
+        id: 'notice',
+        path: '/notice',
+        icon: 'el-icon-message-on',
         role: 'admin',
         name: '公告管理'
     },
     {
-        id: 'admin-complaints',
-        path: '/admin/complaints',
+        id: 'evaluation',
+        path: '/notice/evaluation',
         icon: 'el-icon-star-on',
         role: 'admin',
-        name: '评价信息'
+        name: '评价管理'
     },
     {
         id: 'payfree',
@@ -35,45 +35,10 @@ export default [
         icon: 'el-icon-message-solid'
     },
     {
-        id: 'contribution',
-        path: '/contribution',
-        name: '社区缴费',
+        id: 'admin-order',
+        path: '/admin/order',
+        name: '订单管理',
         role: 'admin',
         icon: 'el-icon-s-order',
-        children: [
-            // {
-            //     id: "contribution-form",
-            //     path: '/contribution/form',
-            //     role:"admin",
-            //     name: '费用缴纳',
-            // },
-            {
-                id: 'contribution-list',
-                path: '/contribution/list',
-                role: 'admin',
-                name: '缴费明细'
-            }
-        ]
     }
-    // {
-    //     id: "admin",
-    //     path: '/admin',
-    //     name: '系统设置',
-    //     role:"admin",
-    //     icon:"el-icon-s-tools",
-    //     children:[
-            // {
-            //     id: "admin-list",
-            //     path: '/admin/list',
-            //     role:"admin",
-            //     name: '管理员',
-            // },
-            // {
-            //     id: "admin-type",
-            //     path: '/admin/type',
-            //     role:"admin",
-            //     name: '缴费项目',
-            // },
-        // ],
-    // }
 ]

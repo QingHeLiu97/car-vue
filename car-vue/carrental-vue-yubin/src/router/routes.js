@@ -1,6 +1,6 @@
 import layout from '@src/layout'
 import admin from './modules/admin'
-import custom from './modules/custom'
+import custom from './modules/user'
 import system from './modules/system'
 import servicing from './modules/servicing'
 import contribution from './modules/contribution'
@@ -27,11 +27,7 @@ const loginIn = [
         }
       ]
     },
-    admin,
-    custom,
-    system,
-    servicing,
-    contribution
+
 
 ]
 

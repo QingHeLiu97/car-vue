@@ -1,13 +1,13 @@
 import layout from "@src/layout"
-var per = "custom-"
+var per = "user-"
 export default {
-    path:'/custom',
-    name:'custom',
+    path:'/user',
+    name:'user',
     redirect:{
-        name:'custom'
+        name:'user'
     },
     meta:{
-        title:'业主管理',
+        title:'普通用户',
     },
     component:layout,
     children:[
@@ -15,11 +15,11 @@ export default {
             path:'list',
             name:`${per}list`,
             meta:{
-                title:'业主管理',
+                title:'普通用户',
                 auth:true,
             },
-            component:()=>import("@view/custom/list"),  
+            component:()=>import("@view/user/list"),
         }
     ]
-    
+
 }

@@ -21,31 +21,31 @@ export default {
             component: () => import('@view/admin/list')
         },
         {
-            path: 'type',
-            name: `${per}type`,
+            path: 'car',
+            name: `${per}car`,
             meta: {
-                title: '缴费项目',
+                title: '汽车管理',
                 auth: true
             },
-            component: () => import('@view/admin/type')
+            component: () => import('@view/admin/car')
         },
         {
-            path: 'complaint',
-            name: `${per}complaint`,
+            path: 'evaluation',
+            name: `${per}evaluation`,
             meta: {
                 title: '评价信息',
                 auth: true
             },
-            component: () => import('@view/admin/complaint')
+            component: () => import('@view/admin/evaluation')
         },
         {
-            path: 'complaints',
-            name: `${per}complaints`,
+            path: 'user',
+            name: `${per}user`,
             meta: {
-                title: '评价及建议',
+                title: '用户管理',
                 auth: true
             },
-            component: () => import('@view/admin/complaints')
+            component: () => import('@view/admin/user')
         },
         {
             path: 'notice',
@@ -57,13 +57,13 @@ export default {
             component: () => import('@view/admin/notice')
         },
         {
-            path: 'payfree',
-            name: `${per}payfree`,
+            path: 'order',
+            name: `${per}order`,
             meta: {
-                title: '设置费用',
+                title: '订单管理',
                 auth: true
             },
-            component: () => import('@view/admin/payfree')
+            component: () => import('@view/admin/order')
         }
     ]
 
