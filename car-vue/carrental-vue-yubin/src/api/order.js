@@ -1,9 +1,8 @@
 import request from '@src/plugins/request'
 
-// 用户登录
-export const accountAuthLogin = function (data) {
+export const getOrderList = function (data) {
     return request({
-        url: '/common/login',
+        url: '/order/list',
         method: 'POST',
         data
     })

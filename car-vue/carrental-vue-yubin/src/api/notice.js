@@ -1,6 +1,6 @@
 import request from '@src/plugins/request'
 
-// 列表
+//  查看消息列表
 export const getNoticeList = function (data) {
     return request({
         url: '/notice/pages',
@@ -8,19 +8,16 @@ export const getNoticeList = function (data) {
         params: data
     })
 }
-// 添加
-export const getNoticeInsert = function (data) {
+// 添加公告
+export const insetNotice = function (data) {
     return request({
         url: '/notice/insert',
         method: 'POST',
-        // headers:{
-        //     "Content-type":"multipart/form-data"
-        // },
         data
     })
 }
 // 更新
-export const getNoticeUpdate = function (data) {
+export const updateNotice = function (data) {
     return request({
         url: '/notice/update',
         method: 'POST',
@@ -28,7 +25,7 @@ export const getNoticeUpdate = function (data) {
     })
 }
 // 删除
-export const getNoticeDelete = function (data) {
+export const deleteNotice = function (data) {
     return request({
         url: '/notice/delete',
         method: 'GET',

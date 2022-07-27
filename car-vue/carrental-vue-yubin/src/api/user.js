@@ -1,9 +1,9 @@
 import request from '@src/plugins/request'
 
 // 用户列表
-export const getUserList = function (data) {
+export const getUserInfo = function (data) {
     return request({
-        url: '/user/pages',
+        url: '/user/getUserInfo',
         method: 'GET',
         params: data
     })
@@ -33,15 +33,5 @@ export const getUserDelete = function (data) {
         url: '/user/delete',
         method: 'GET',
         params: data
-    })
-}
-export const getUserById = function (data) {
-    return request({
-        url: '/user/findUserById',
-        method: 'GET',
-        params: {
-            data: data
-        },
-        data
     })
 }

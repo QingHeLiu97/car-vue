@@ -1,9 +1,8 @@
 import request from '@src/plugins/request'
 
-// 用户登录
-export const accountAuthLogin = function (data) {
+export const getEvaluationList = function (data) {
     return request({
-        url: '/common/login',
+        url: '/evaluation/list',
         method: 'POST',
         data
     })

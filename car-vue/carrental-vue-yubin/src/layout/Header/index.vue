@@ -7,7 +7,7 @@
             <el-dropdown style="color: #212121; font-size:16px">
                 <span class="a-dropdown-link">
                     <span style="margin-right:10px" v-if="role=='admin'">【管理员】{{userInfo ?  userInfo.name : "用户名"}}</span>
-					<span style="margin-right:10px" v-if="role=='user'">【业主】{{userInfo ?  userInfo.name : "用户名"}}</span>
+					<span style="margin-right:10px" v-if="role=='user'">【普通用户】{{userInfo ?  userInfo.name : "用户名"}}</span>
 					<span style="margin-right:10px" v-if="role=='superAdmin'">【超级管理员】{{userInfo ?  userInfo.name : "用户名"}}</span>
                     <el-avatar size="medium" :src="userInfo ?  userInfo.avatar : circleUrl"></el-avatar>
                     <i class="el-icon-caret-bottom el-icon--right"></i>
