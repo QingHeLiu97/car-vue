@@ -19,6 +19,7 @@ export default {
         // 设置菜单展开
         setMenuSubOpen (state, index) {
             const i = state.menuSubOpen.indexOf(index)
+            // eslint-disable-next-line eqeqeq
             if (i == -1)state.menuSubOpen.push(index);
         },
         // 设置菜单收起

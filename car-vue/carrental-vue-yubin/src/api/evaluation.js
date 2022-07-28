@@ -7,3 +7,24 @@ export const getEvaluationList = function (data) {
         data
     })
 }
+export const insetEvaluation = function (data) {
+    return request({
+        url: '/evaluation/inserts',
+        method: 'POST',
+        data
+    })
+}
+export const deleteEvaluation = function (data) {
+    return request({
+        url: '/evaluation/delete',
+        method: 'POST',
+        data
+    })
+}
+export const updateEvaluation = function (data) {
+    return request({
+        url: '/evaluation/update',
+        method: 'POST',
+        data
+    })
+}

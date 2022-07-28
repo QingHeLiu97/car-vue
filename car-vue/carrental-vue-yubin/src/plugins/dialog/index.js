@@ -2,7 +2,7 @@ import Vue from 'vue'
 
 // v-dialogDrag: 弹窗拖拽
 Vue.directive('dialogDrag', {
-  bind(el, binding, vnode, oldVnode) {
+  bind (el, binding, vnode, oldVnode) {
     const dialogHeaderEl = el.querySelector('.el-dialog__header')
     const dragDom = el.querySelector('.el-dialog')
     dialogHeaderEl.style.cursor = 'move'
@@ -20,14 +20,14 @@ Vue.directive('dialogDrag', {
 
       // 注意在ie中 第一次获取到的值为组件自带50% 移动之后赋值为px
       if (sty.left.includes('%')) {
-        styL = +document.body.clientWidth * (+sty.left.replace(/\%/g, '') / 100)
-        styT = +document.body.clientHeight * (+sty.top.replace(/\%/g, '') / 100)
+        styL = +document.body.clientWidth * (+sty.left.replace(/%/g, '') / 100)
+        styT = +document.body.clientHeight * (+sty.top.replace(/%/g, '') / 100)
       } else {
         styL = +sty.left.replace(/\px/g, '')
         styT = +sty.top.replace(/\px/g, '')
       }
 
-      document.onmousemove = function(e) {
+      document.onmousemove = function (e) {
         // 通过事件委托，计算移动的距离
         const l = e.clientX - disX
         const t = e.clientY - disY
@@ -40,7 +40,7 @@ Vue.directive('dialogDrag', {
         // binding.value({x:e.pageX,y:e.pageY})
       }
 
-      document.onmouseup = function(e) {
+      document.onmouseup = function (e) {
         document.onmousemove = null
         document.onmouseup = null
       }

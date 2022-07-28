@@ -7,3 +7,24 @@ export const getOrderList = function (data) {
         data
     })
 }
+export const insertOrder = function (data) {
+    return request({
+        url: '/order/insert',
+        method: 'POST',
+        data
+    })
+}
+export const deleteOrder = function (data) {
+    return request({
+        url: '/order/delete',
+        method: 'POST',
+        data
+    })
+}
+export const updateOrder = function (data) {
+    return request({
+        url: '/order/update',
+        method: 'POST',
+        data
+    })
+}

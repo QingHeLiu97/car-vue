@@ -25,3 +25,10 @@ export const getCarList = function (data) {
     })
 }
 
+export const updateCar = function (data) {
+    return request({
+        url: '/car/update',
+        method: 'POST',
+        data
+    })
+}

@@ -1,15 +1,6 @@
 import request from '@src/plugins/request'
 
-// 用户列表
-export const getUserInfo = function (data) {
-    return request({
-        url: '/user/getUserInfo',
-        method: 'GET',
-        params: data
-    })
-}
-// 添加
-export const getUserInsert = function (data) {
+export const insertUser = function (data) {
     return request({
         url: '/user/insert',
         method: 'POST',
@@ -20,7 +11,7 @@ export const getUserInsert = function (data) {
     })
 }
 // 更新
-export const getUserUpdate = function (data) {
+export const updateUser = function (data) {
     return request({
         url: '/user/update',
         method: 'POST',
@@ -28,10 +19,18 @@ export const getUserUpdate = function (data) {
     })
 }
 // 删除
-export const getUserDelete = function (data) {
+export const deleteUser = function (data) {
     return request({
         url: '/user/delete',
         method: 'GET',
         params: data
     })
 }
+export const getUserList = function (data) {
+    return request({
+        url: '/user/list',
+        method: 'GET',
+        params: data
+    })
+}
+
