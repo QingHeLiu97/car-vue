@@ -7,7 +7,7 @@ export default {
         name: `${per}list`
     },
     meta: {
-        title: '系统设置'
+        title: '数据管理'
     },
     component: layout,
     children: [
@@ -15,7 +15,7 @@ export default {
             path: 'list',
             name: `${per}list`,
             meta: {
-                title: '管理员',
+                title: '用户管理',
                 auth: true
             },
             component: () => import('@view/admin/list')
@@ -27,25 +27,16 @@ export default {
                 title: '汽车管理',
                 auth: true
             },
-            component: () => import('@view/admin/car')
+            component: () => import('@view/car/list')
         },
         {
-            path: 'evaluation',
-            name: `${per}evaluation`,
+            path: 'appraise',
+            name: `${per}appraise`,
             meta: {
                 title: '评价信息',
                 auth: true
             },
-            component: () => import('@view/admin/evaluation')
-        },
-        {
-            path: 'user',
-            name: `${per}user`,
-            meta: {
-                title: '用户管理',
-                auth: true
-            },
-            component: () => import('@view/admin/user')
+            component: () => import('@view/appraise/list')
         },
         {
             path: 'notice',
@@ -54,7 +45,7 @@ export default {
                 title: '公告管理',
                 auth: true
             },
-            component: () => import('@view/admin/notice')
+            component: () => import('@view/notice/list')
         },
         {
             path: 'order',
@@ -63,7 +54,7 @@ export default {
                 title: '订单管理',
                 auth: true
             },
-            component: () => import('@view/admin/order')
+            component: () => import('@view/order/list')
         }
     ]
 

@@ -22,14 +22,14 @@ export const updateUser = function (data) {
 export const deleteUser = function (data) {
     return request({
         url: '/user/delete',
-        method: 'GET',
+        method: 'POST',
         params: data
     })
 }
 export const getUserList = function (data) {
     return request({
         url: '/user/list',
-        method: 'GET',
+        method: 'POST',
         params: data
     })
 }

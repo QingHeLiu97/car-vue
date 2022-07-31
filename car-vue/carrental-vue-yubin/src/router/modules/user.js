@@ -15,11 +15,11 @@ export default {
             path:'list',
             name:`${per}list`,
             meta:{
-                title:'普通用户',
+                title:'用户信息',
                 auth:true,
             },
             component:()=>import("@view/user/list"),
-        }
+        },
     ]
 
 }

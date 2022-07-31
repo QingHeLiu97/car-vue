@@ -2,20 +2,20 @@
   <div style="width: 60%;margin:0 auto;">
     <el-card shadow="never">
       <el-form :model="formData" ref="formData" :rules="formRule" label-width="100px">
-        <el-form-item prop="residential" label="房号">
-          <el-input v-model="formData.residential" disabled size="small" placeholder="请填写房号"></el-input>
+        <el-form-item prop="residential" label="username">
+          <el-input v-model="formData.residential" disabled size="small" placeholder="请填写姓名"></el-input>
         </el-form-item>
-        <el-form-item prop="name" label="姓名">
-          <el-input v-model="formData.name" size="small" placeholder="请填写姓名"></el-input>
+        <el-form-item prop="username" label="姓名">
+          <el-input v-model="formData.username" size="small" placeholder="请填写姓名"></el-input>
         </el-form-item>
         <el-form-item prop="phone" label="联系方式">
           <el-input v-model="formData.phone" :maxlength="11" size="small" placeholder="请填写联系方式"></el-input>
         </el-form-item>
-        <el-form-item prop="idCard" label="身份证号">
-          <el-input v-model="formData.idCard" disabled size="small" placeholder="请填写身份证号"></el-input>
+        <el-form-item prop="id_card" label="身份证号">
+          <el-input v-model="formData.id_card" disabled size="small" placeholder="请填写身份证号"></el-input>
         </el-form-item>
-        <el-form-item prop="addressCard" label="身份证地址">
-          <el-input v-model="formData.addressCard" disabled size="small" placeholder="请填写身份证地址"></el-input>
+        <el-form-item prop="address" label="身份证地址">
+          <el-input v-model="formData.address" disabled size="small" placeholder="请填写身份证地址"></el-input>
         </el-form-item>
 
         <el-form-item>
@@ -44,13 +44,6 @@
                     residential: '',
                     role: 'admin',
                     status: true
-                },
-                formRule: {
-                    name: [{ required: true, message: '请填写姓名', trigger: 'blur' }],
-                    phone: [{ required: true, message: '请填写联系方式', trigger: 'blur' }],
-                    idCard: [{ required: true, message: '请填写身份证号', trigger: 'blur' }],
-                    addressCard: [{ required: true, message: '请填写身份证地址', trigger: 'blur' }],
-                    residential: [{ required: true, message: '请填写房号', trigger: 'blur' }]
                 }
             }
         },

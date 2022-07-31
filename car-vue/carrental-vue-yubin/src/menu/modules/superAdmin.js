@@ -1,14 +1,14 @@
 export default [
     {
-        id: 'admin-user',
-        path: '/admin/user',
+        id: 'user',
+        path: '/user',
         name: '用户管理',
         role: 'super',
         icon: 'el-icon-s-solid'
     },
     {
-        id: 'admin-car',
-        path: '/admin/car',
+        id: 'car',
+        path: '/car',
         name: '汽车管理',
         role: 'super',
         icon: 'el-icon-s-cooperation'
@@ -21,31 +21,24 @@ export default [
         name: '公告管理'
     },
     {
-        id: 'evaluation',
-        path: '/notice/evaluation',
+        id: 'appraise',
+        path: '/list',
         icon: 'el-icon-star-on',
         role: 'super',
         name: '评价管理'
     },
     {
-        id: 'payfree',
-        path: '/admin/payfree',
-        name: '发布缴费',
-        role: 'super',
-        icon: 'el-icon-message-solid'
-    },
-    {
-        id: 'admin-order',
-        path: '/admin/order',
+        id: 'order',
+        path: '/order',
         name: '订单管理',
         role: 'super',
-        icon: 'el-icon-s-order',
+        icon: 'el-icon-s-on',
     },
     {
-        id: 'admin-admin',
-        path: '/admin/admin',
+        id: 'admin',
+        path: '/admin',
         name: '管理员管理',
         role: 'super',
-        icon: 'el-icon-s-order',
+        icon: 'el-icon-s-on',
     }
 ]

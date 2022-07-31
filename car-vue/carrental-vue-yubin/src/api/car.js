@@ -1,6 +1,6 @@
 import request from '@src/plugins/request'
 
-export const insetCar = function (data) {
+export const insertCar = function (data) {
     return request({
         url: '/car/add',
         method: 'POST',

@@ -10,10 +10,8 @@ const Setting = {
     routerMode: 'hash',
     // 应用的基路径
     routerBase: '/',
-    // 接口请求地址
-    // eslint-disable-next-line eqeqeq
-    apiBaseURL: env == 'development' ? '/localhost:8001' : '/',
-    // 腾讯地图接口请求地址
+
+    apiBaseURL: env == 'development' ? '/localhost' : '/',
     // eslint-disable-next-line eqeqeq
     mapApiURL: env == 'development' ? '/mapApi' : 'https://apis.map.qq.com',
     // 接口统一请求头

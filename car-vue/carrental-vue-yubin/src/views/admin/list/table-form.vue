@@ -3,18 +3,18 @@
         <el-form @submit.native.prevent :inline="false" :model="formData" ref="formData" label-width="100px">
           <el-row>
             <el-col :span="6">
-              <el-form-item label="姓名" prop="name">
-                  <el-input v-model="formData.name" size="small" clearable placeholder="请输入管理员姓名"></el-input>
+              <el-form-item label="姓名" prop="username">
+                  <el-input v-model="formData.username" size="small" clearable placeholder="请输入业主姓名"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="6">
-              <el-form-item label="账号" prop="phone">
-                  <el-input v-model="formData.phone" size="small" clearable placeholder="请输入管理员账号"></el-input>
+              <el-form-item label="手机号" prop="phone">
+                  <el-input v-model="formData.phone" size="small" clearable placeholder="请输入手机号"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="6">
               <el-form-item label="身份证号" prop="idCard">
-                  <el-input v-model="formData.idCard" size="small" clearable placeholder="请输入管理员身份证号"></el-input>
+                  <el-input v-model="formData.id_card" size="small" clearable placeholder="请输入身份证号"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="6">
@@ -42,7 +42,7 @@
                 formData: {
                     name: '',
                     phone: '',
-                    idCard: '',
+                    id_card: '',
                     status: '',
                 }
             }
