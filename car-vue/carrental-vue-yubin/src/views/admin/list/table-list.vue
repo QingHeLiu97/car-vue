@@ -1,15 +1,10 @@
 <template>
   <el-card v-loading="loadingStatus" shadow="never">
     <div style="margin-bottom:20px">
-      <el-button type="primary" size="small" @click="handleCreate">新增用户<el-button>
+      <el-button type="primary" size="small" @click="handleCreate">新增用户</el-button>
     </div>
     <el-table :data="tableData" border style="width: 100%" >
       <el-table-column header-align-="center" align="center" min-width="100" prop="id" label="ID"></el-table-column>
-      <!-- <el-table-column header-align-="center" align="center" min-width="100" prop="avatar" label="头像">
-        <template slot-scope="{row}">
-          <el-avatar shape="square" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"></el-avatar>
-        </template>
-      </el-table-column> -->
       <el-table-column header-align-="center" align="center" min-width="200" prop="user_id" label="用户编号"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="100" prop="username" label="姓名"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="150" prop="sex" label="性别"></el-table-column>

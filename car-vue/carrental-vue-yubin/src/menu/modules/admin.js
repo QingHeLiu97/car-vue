@@ -1,35 +1,35 @@
 export default [
     {
-        id: 'user',
-        path: '/user/list',
+        id: 'admin-list',
+        path: '/admin/list',
         name: '用户管理',
         role: 'admin',
         icon: 'el-icon-s-tools'
     },
     {
-        id: 'car',
-        path: '/car/list',
+        id: 'admin-car',
+        path: '/admin/car',
         name: '汽车管理',
         role: 'admin',
         icon: 'el-icon-s-tools'
     },
     {
-        id: 'notice',
-        path: '/notice/list',
+        id: 'admin-notice',
+        path: '/admin/notice',
         icon: 'el-icon-s-tools',
         role: 'admin',
         name: '公告管理'
     },
     {
-        id: 'appraise',
-        path: '/appraise/list',
+        id: 'admin-appraise',
+        path: '/admin/appraise',
         icon: 'el-icon-s-tools',
         role: 'admin',
         name: '评价管理'
     },
     {
         id: 'order',
-        path: '/order/list',
+        path: '/admin/order',
         icon: 'el-icon-s-tools',
         name: '订单管理',
         role: 'admin'

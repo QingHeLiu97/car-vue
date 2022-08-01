@@ -26,7 +26,8 @@
         },
         methods: {
             handleMenuClick (option) {
-                if (option.path && option.path.indexOf('/' == 0)) {
+                if (option.path && option.path.indexOf('/' === 0)) {
+                    console.log(option.path)
                     this.$router.push({ path: option.path })
                 } else {
                     this.$router.push({ path: '/404' })
