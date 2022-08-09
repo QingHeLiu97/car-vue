@@ -27,13 +27,13 @@ export default [
         role: 'admin',
         name: '评价管理'
     },
-    {
-        id: 'payfree',
-        path: '/admin/payfree',
-        name: '发布缴费',
-        role: 'admin',
-        icon: 'el-icon-message-solid'
-    },
+    // {
+    //     id: 'payfree',
+    //     path: '/admin/payfree',
+    //     name: '发布缴费',
+    //     role: 'admin',
+    //     icon: 'el-icon-message-solid'
+    // },
     {
         id: 'admin-order',
         path: '/admin/order',
