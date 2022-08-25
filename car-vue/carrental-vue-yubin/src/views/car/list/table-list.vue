@@ -1,28 +1,28 @@
 <template>
   <el-card v-loading="loadingStatus" shadow="never">
     <div style="margin-bottom:20px">
-      <el-button type="primary" size="small" @click="handleCreate">新增业主</el-button>
+      <el-button type="primary" size="small" @click="handleCreate">发布车源</el-button>
     </div>
     <el-table :data="tableData" border style="width: 100%" >
-      <el-table-column header-align-="center" align="center" min-width="200" prop="car_id" label="编号"></el-table-column>
+      <el-table-column header-align-="center" align="center" min-width="200" prop="carId" label="编号"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="200" prop="type" label="类型"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="100" prop="color" label="颜色"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="150" prop="price" label="价格"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="200" prop="deposit" label="押金"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="200" prop="carname" label="车名"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="200" prop="createTime" label="创建时间"></el-table-column>
-      <el-table-column header-align-="center" align="center" min-width="200" prop="update_time" label="更新时间"></el-table-column>
+      <el-table-column header-align-="center" align="center" min-width="200" prop="updateTime" label="更新时间"></el-table-column>
         <el-table-column header-align-="center" align="center" min-width="100" prop="status" label="状态">
         <template slot-scope="{row}">
-          <el-tag type="success" size="small" v-if="row.status == 1">正常</el-tag>
-          <el-tag type="info" size="small" v-else>禁用</el-tag>
+          <el-tag type="success" size="small" v-if="row.status == 0">未出租</el-tag>
+          <el-tag type="info" size="small" v-else>已出租</el-tag>
         </template>
       </el-table-column>
       <el-table-column header-align="center" align="center" fixed="right"  width="250" label="操作">
         <template slot-scope="{row}">
              <el-button type="primary" size="small" @click="handleEdit(row)">编辑</el-button>
              <el-popconfirm placement="top" title="确定要删除这条数据吗" @confirm="handleDele(row)">
-              <el-button slot="reference" type="danger" size="small" style="margin-left:10px">删除</el-button>
+              <el-button  v-if="row.status == 0" slot="reference" type="danger" size="small" style="margin-left:10px">删除</el-button>
              </el-popconfirm>
         </template>
       </el-table-column>
@@ -44,7 +44,7 @@
 </template>
 <script>
     import tableEdti from './table-edte.vue'
-    import {deleteCar, getCarList, updateCar} from "../../../api/car";
+    import { deleteCar, getCarList } from "../../../api/car";
     export default {
         components: { tableEdti },
         data () {
@@ -64,25 +64,27 @@
                 var pageSize = this.pageSize
                 var current = this.currentPage
                 var formData = this.$parent.$refs.tableForm.formData;
-                getCarList({ current, pageSize, role: 'custom', ...formData }).then(res => {
-                    this.total = res.result.total;
-                    this.tableData = res.result.records;
-                    this.loadingStatus = false;
+                getCarList({ formData }).then(res => {
+                    console.log("成功", res)
+                    this.tableData = res.result
+                    this.loadingStatus = false
                 }).catch(err => {
+                    console.log("失败", err)
+                    this.tableData = err
                     this.loadingStatus = false
                 })
             },
             handleCreate () {
-                this.$refs.tableEdti.open(undefined, '发布车源')
+                this.$refs.tableEdti.open(null, '发布车源')
             },
             handleEdit (row) {
                 this.$refs.tableEdti.open(row, '修改车辆信息')
             },
             handleDele (row) {
-                deleteCar({ id: row.id }).then(res => {
+                deleteCar({ carId: row.carId }).then(res => {
                     this.getData();
                 }).catch(err => {
-
+                    console.log("失败", err)
                 })
             },
             handleChangePageSizes (val) {

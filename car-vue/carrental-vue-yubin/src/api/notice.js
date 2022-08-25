@@ -13,7 +13,7 @@ export const insertNotice = function (data) {
     return request({
         url: '/notice/insert',
         method: 'POST',
-        data
+        params: data
     })
 }
 // 更新
@@ -21,7 +21,7 @@ export const updateNotice = function (data) {
     return request({
         url: '/notice/update',
         method: 'POST',
-        data
+        params: data
     })
 }
 // 删除

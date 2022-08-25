@@ -1,6 +1,6 @@
 <template>
   <el-dialog v-dialogDrag :title="dialogTitle" :close-on-click-modal="false" width="30%" ref="dialogView" append-to-body :before-close="onBeforeClose" :visible.sync="visible">
-        <el-form :model="formData" ref="formData" :rules="formRule" label-width="100px">
+        <el-form :model="formData" ref="formData" label-width="100px">
           <el-form-item prop="create_by" label="姓名">
             <el-input v-model="formData.username" size="small" placeholder="请填写姓名"></el-input>
           </el-form-item>
@@ -12,24 +12,24 @@
   </el-dialog>
 </template>
 <script>
-import {getUserInfo, updateUser} from '@api/user.js'
-import {insetAppraise} from "../../../api/appraise";
-export default {
+    import {insetAppraise} from '@api/appraise.js';
+
+    export default {
   data() {
     return {
       data: {},
       visible: false,
       loadingStatus: false,
-      dialogTitle:"",
+      dialogTitle: "",
       formData:{
-        appraise_id:null,
-        content:"",
-        create_by:"",
-        create_time:"",
-        uodate_time:"",
-        role:"user",
-        level:"user",
-        status:true,
+        appraise_id: null,
+        content: "",
+        createBy: "",
+        createTime: "",
+        uodateTime: "",
+        role: "user",
+        level: "",
+        status:"",
       },
     }
   },

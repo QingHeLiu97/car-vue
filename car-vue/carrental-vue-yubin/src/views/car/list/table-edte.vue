@@ -13,11 +13,16 @@
           <el-form-item prop="deposit" label="押金">
             <el-input v-model="formData.deposit" size="small" placeholder="请填写押金"></el-input>
           </el-form-item>
-          <el-form-item prop="addressCard" label="车名">
-            <el-input v-model="formData.addressCard" size="small" placeholder="请填写车名"></el-input>
+          <el-form-item prop="carname" label="车名">
+            <el-input v-model="formData.carname" size="small" placeholder="请填写车名"></el-input>
           </el-form-item>
           <el-form-item prop="status" label="状态">
-            <el-switch v-model="formData.status"  active-color="#13ce66"></el-switch>
+              <el-switch    v-model="formData.status"
+                            class="switch"
+                            active-value="1"
+                            inactive-value="0"
+                            active-text="已出租"
+                            inactive-text="未出租"></el-switch>
           </el-form-item>
           <el-form-item>
                 <el-button type="primary" size="small" :loading="loadingStatus" @click="onSubmit" >提交</el-button>
@@ -27,7 +32,8 @@
   </el-dialog>
 </template>
 <script>
-import {insertCar, updateCar} from '@api/car.js'
+import { insertCar, updateCar } from '@api/car.js'
+import {getCarList} from "../../../api/car";
 export default {
   data() {
     return {
@@ -36,14 +42,13 @@ export default {
       loadingStatus: false,
       dialogTitle:"",
       formData:{
-        car_id:null,
+        carId:null,
         type:"",
         color:"",
         price:"",
         deposit:"",
         carname:"",
-        role:"admin",
-        status:true,
+        status: "",
       },
       formRule:{
         deposit:[{ required: true, message: '请填写押金', trigger: 'blur' }],
@@ -72,12 +77,21 @@ export default {
         if (vali) {
           var formData = this.formData;
           this.loadingStatus = true;
-          if(formData.id){
+          if(formData.carId){
             updateCar(formData).then(res => {
               this.loadingStatus = false;
               this.$message.success("修改成功")
               this.$refs.dialogView.handleClose()
               this.$emit("onSuccess")
+                // getCarList({ formData }).then(res => {
+                //     console.log("成功", res)
+                //     this.tableData = res.result
+                //     this.loadingStatus = false
+                // }).catch(err => {
+                //     console.log("失败", err)
+                //     this.tableData = err
+                //     this.loadingStatus = false
+                // })
             }).catch(err => {
               this.loadingStatus = false;
             })

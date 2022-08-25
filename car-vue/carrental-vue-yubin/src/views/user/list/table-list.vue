@@ -69,9 +69,7 @@
                 var current = this.currentPage
                 var formData = this.$parent.$refs.tableForm.formData;
                 getUserList({ current, pageSize, role: 'user', ...formData }).then(res => {
-                    console.log(res)
-                    this.total = res.result.total;
-                    this.tableData = res.result.records;
+                    this.tableData = res.result;
                     this.loadingStatus = false;
                 }).catch(err => {
                     this.loadingStatus = false

@@ -14,14 +14,14 @@
             </el-col>
             <el-col :span="6">
               <el-form-item label="身份证号" prop="idCard">
-                  <el-input v-model="formData.id_card" size="small" clearable placeholder="请输入身份证号"></el-input>
+                  <el-input v-model="formData.idCard" size="small" clearable placeholder="请输入身份证号"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="6">
               <el-form-item label="状态" prop="status">
                   <el-select v-model="formData.status" size="small" clearable style="width:100%;" placeholder="请选择状态">
-                    <el-option label="正常" :value="1"></el-option>
-                    <el-option label="禁用" :value="0"></el-option>
+                    <el-option label="正常" :value="0"></el-option>
+                    <el-option label="禁用" :value="1"></el-option>
                   </el-select>
               </el-form-item>
             </el-col>
@@ -42,7 +42,7 @@
                 formData: {
                     name: '',
                     phone: '',
-                    id_card: '',
+                    idCard: '',
                     status: '',
                 }
             }

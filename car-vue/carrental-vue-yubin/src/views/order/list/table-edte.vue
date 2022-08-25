@@ -1,33 +1,38 @@
 <template>
   <el-dialog v-dialogDrag :title="dialogTitle" :close-on-click-modal="false" width="30%" ref="dialogView" append-to-body :before-close="onBeforeClose" :visible.sync="visible">
-        <el-form :model="formData" ref="formData" :rules="formRule" label-width="100px">
-          <el-form-item prop="car_id" label="汽车id">
-            <el-input v-model="formData.car_id" size="small" placeholder="请填写汽车id"></el-input>
+        <el-form :model="formData" ref="formData"  label-width="100px">
+          <el-form-item prop="carId" label="汽车id">
+            <el-input v-model="formData.carId" size="small" placeholder="请填写汽车id"></el-input>
           </el-form-item>
           <el-form-item prop="car_type" label="汽车类型">
-            <el-input v-model="formData.car_type" size="small" placeholder="请填写汽车类型"></el-input>
+            <el-input v-model="formData.carType" size="small" placeholder="请填写汽车类型"></el-input>
           </el-form-item>
           <el-form-item prop="car_price" label="租车价格">
-            <el-input v-model="formData.car_price" :maxlength="11" size="small" placeholder="请填写租车价格"></el-input>
+            <el-input v-model="formData.carPrice" :maxlength="11" size="small" placeholder="请填写租车价格"></el-input>
           </el-form-item>
           <el-form-item prop="deposit" label="租车押金">
             <el-input v-model="formData.deposit" size="small" placeholder="请填写租车押金"></el-input>
           </el-form-item>
           <el-form-item prop="user_id" label="租车人id">
-            <el-input v-model="formData.user_id" size="small" placeholder="请填写租车人id"></el-input>
+            <el-input v-model="formData.userId" size="small" placeholder="请填写租车人id"></el-input>
           </el-form-item>
-            <el-form-item prop="username" label="租车人id">
-                <el-input v-model="formData.username" size="small" placeholder="请填写租车人id"></el-input>
+            <el-form-item prop="username" label="租车人姓名">
+                <el-input v-model="formData.username" size="small" placeholder="请填写租车人姓名"></el-input>
             </el-form-item>
             <el-form-item prop="user_phone" label="租车人电话">
-                <el-input v-model="formData.user_phone" size="small" placeholder="请填写租车人电话"></el-input>
+                <el-input v-model="formData.userPhone" size="small" placeholder="请填写租车人电话"></el-input>
             </el-form-item>
             <el-form-item prop="addressCard" label="租车人地址">
-                <el-input v-model="formData.user_address" size="small" placeholder="请填写租车人地址"></el-input>
+                <el-input v-model="formData.userAddress" size="small" placeholder="请填写租车人地址"></el-input>
             </el-form-item>
-          <el-form-item prop="status" label="状态">
-            <el-switch v-model="formData.status"  active-color="#13ce66"></el-switch>
-          </el-form-item>
+            <el-form-item prop="status" label="状态">
+                <el-switch    v-model="formData.status"
+                              class="switch"
+                              active-value="1"
+                              inactive-value="0"
+                              active-text="封禁"
+                              inactive-text="正常"></el-switch>
+            </el-form-item>
           <el-form-item>
                 <el-button type="primary" size="small" :loading="loadingStatus" @click="onSubmit" >提交</el-button>
                 <el-button type="default" size="small" :loading="loadingStatus" @click="$refs.dialogView.handleClose()">取消</el-button>
@@ -46,20 +51,20 @@ export default {
       loadingStatus: false,
       dialogTitle:"",
       formData:{
-        order_id:null,
-        car_id:"",
-        car_price:"",
-        car_type:"",
-        car_color:"",
+        orderId:null,
+        carId:"",
+        carPrice:"",
+        carType:"",
+        carColor:"",
         deposit:"",
-        user_id:"",
+        userId:"",
         username:"",
-        user_phone:"",
-        user_address:"",
-        handlres_name:"",
-        create_time:"",
+        userPhone:"",
+        userAddress:"",
+        handlresName:"",
+        createTime:"",
         role:"admin",
-        status:true,
+        status:"",
       }
     }
   },
@@ -84,8 +89,9 @@ export default {
         if (vali) {
           var formData = this.formData;
           this.loadingStatus = true;
-          if(formData.id){
+          if(formData.orderId){
             updateOrder(formData).then(res => {
+                console.log(res)
               this.loadingStatus = false;
               this.$message.success("修改成功")
               this.$refs.dialogView.handleClose()

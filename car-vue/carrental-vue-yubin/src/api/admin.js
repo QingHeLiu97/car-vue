@@ -4,27 +4,27 @@ export const getAdminList = function (data) {
     return request({
         url: '/admin/list',
         method: 'POST',
-        data
+        params: data
     })
 }
 export const insetAdmin = function (data) {
     return request({
         url: '/admin/insert',
         method: 'POST',
-        data
+        params: data
     })
 }
 export const deleteAdmin = function (data) {
     return request({
         url: '/admin/delete',
         method: 'POST',
-        data
+        params: data
     })
 }
 export const updateAdmin = function (data) {
     return request({
         url: '/admin/update',
         method: 'POST',
-        data
+        params: data
     })
 }
