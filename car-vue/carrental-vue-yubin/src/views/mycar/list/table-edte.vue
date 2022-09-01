@@ -16,6 +16,9 @@
           <el-form-item prop="carname" label="车名">
             <el-input v-model="formData.carname" size="small" placeholder="请填写车名"></el-input>
           </el-form-item>
+            <el-form-item prop="userPhone" label="车主联系方式">
+                <el-input v-model="formData.userPhone" size="small" placeholder="请填写车名"></el-input>
+            </el-form-item>
           <el-form-item prop="status" label="状态">
               <el-switch    v-model="formData.status"
                             class="switch"
@@ -48,6 +51,7 @@ export default {
         color:"",
         price:"",
         deposit:"",
+        userPhone:"",
         carname:"",
         status: "",
       },

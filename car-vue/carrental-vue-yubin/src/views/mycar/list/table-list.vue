@@ -7,24 +7,24 @@
       <el-table-column header-align-="center" align="center" min-width="200" prop="carId" label="编号"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="200" prop="type" label="类型"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="100" prop="color" label="颜色"></el-table-column>
+      <el-table-column header-align-="center" align="center" min-width="100" prop="userPhone" label="颜色"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="150" prop="price" label="价格"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="200" prop="deposit" label="押金"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="200" prop="carname" label="车名"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="200" prop="createTime" label="创建时间"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="200" prop="updateTime" label="更新时间"></el-table-column>
-        <el-table-column header-align-="center" align="center" min-width="100" prop="status" label="状态">
+       <el-table-column header-align-="center" align="center" min-width="100" prop="status" label="状态">
         <template slot-scope="{row}">
           <el-tag type="success" size="small" v-if="row.status == 0">未出租</el-tag>
           <el-tag type="info" size="small" v-else>已出租</el-tag>
         </template>
       </el-table-column>
-      <el-table-column v-model="roles" header-align="center" align="center" fixed="right"  width="250" label="操作">
-        <template slot-scope="{row}"  >
-            <el-button :hidden="roles == 'user'" type="primary" size="small" @click="handleEdit(row)">编辑</el-button>
-            <el-popconfirm placement="top" title="确定要删除这条数据吗" @confirm="handleDele(row)">
-                <el-button :hidden="roles == 'user'"  v-if="row.status === 0" slot="reference" type="danger" size="small" style="margin-left:10px">删除</el-button>
-            </el-popconfirm>
-<!--             <el-button hidden="true" type="primary" size="small" @click="yuding(row)">预定</el-button>-->
+      <el-table-column   header-align="center" align="center" fixed="right"  width="250" label="操作">
+          <template slot-scope="{row}">
+             <el-button type="primary" size="small" @click="handleEdit(row)">编辑</el-button>
+             <el-popconfirm placement="top" title="确定要删除这条数据吗" @confirm="handleDele(row)">
+              <el-button  v-if="row.status == 0" slot="reference" type="danger" size="small" style="margin-left:10px">删除</el-button>
+             </el-popconfirm>
         </template>
       </el-table-column>
     </el-table>
@@ -56,7 +56,7 @@
                 total: 0, // 总条数
                 pageSize: 10, // 每条总数
                 currentPage: 1, // 当前页
-                roles: "",
+                roles: userInfo.role,
                 pageSizes: [10, 20, 30, 40] // 每条总数配置
             }
         },
@@ -67,13 +67,13 @@
             // 获取数据u
             getData () {
                 var phone = this.userInfo.phone
-                this.roles = this.userInfo.role
-                console.log("phone",phone,this.roles)
+                var roles = this.userInfo.role
+                console.log("phone",phone,roles)
                 this.loadingStatus = true
                 var pageSize = this.pageSize
                 var current = this.currentPage
                 var formData = this.$parent.$refs.tableForm.formData;
-                getCarList({ formData }).then(res => {
+                getCarList({  phone, ...formData }).then(res => {
                     console.log("成功", res)
                     this.tableData = res.result
                     this.loadingStatus = false
@@ -99,9 +99,6 @@
             handleChangePageSizes (val) {
                 this.pageSize = val
                 this.getData()
-            },
-            yuding (val) {
-
             },
             handleChangeCurrent (val) {
                 this.currentPage = val

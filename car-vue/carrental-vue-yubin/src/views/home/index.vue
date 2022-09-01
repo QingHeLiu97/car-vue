@@ -4,7 +4,7 @@
             <el-col :span="12" style="margin-bottom: 20px">
                 <el-card style="height:400px">
                     <div style="display:flex; align-items:center;">
-                        <el-avatar :size="100" :src="userInfo?userInfo.avatar:circleUrl"></el-avatar>
+<!--                        <el-avatar :size="100" :src="userInfo?userInfo.avatar:circleUrl"></el-avatar>-->
                         <div style="margin-left: 40px">
                             <h1 style="margin:0;font-size:30px; font-weight:400; color:#212121">{{userInfo?userInfo.name:''}}</h1>
                             <p style="margin:0; color:#999" v-if="role == 'admin'">管理员</p>
