@@ -3,18 +3,18 @@
         <el-form @submit.native.prevent :inline="false" :model="formData" ref="formData" label-width="100px">
           <el-row>
             <el-col :span="6">
-              <el-form-item label="姓名" prop="username">
-                  <el-input v-model="formData.username" size="small" clearable placeholder="请输入业主姓名"></el-input>
+              <el-form-item label="价格" prop="price">
+                  <el-input v-model="formData.price" size="small" clearable placeholder="请输入价格"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="6">
-              <el-form-item label="手机号" prop="phone">
-                  <el-input v-model="formData.phone" size="small" clearable placeholder="请输入手机号"></el-input>
+              <el-form-item label="押金" prop="deposit">
+                  <el-input v-model="formData.deposit" size="small" clearable placeholder="请输入押金"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="6">
-              <el-form-item label="身份证号" prop="idCard">
-                  <el-input v-model="formData.id_card" size="small" clearable placeholder="请输入身份证号"></el-input>
+              <el-form-item label="类型" prop="type">
+                  <el-input v-model="formData.type" size="small" clearable placeholder="请输入汽车类型"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="6">
@@ -40,10 +40,14 @@
         data () {
             return {
                 formData: {
-                    name: '',
-                    phone: '',
-                    id_card: '',
-                    status: '',
+                    car_id:null,
+                    type:"",
+                    color:"",
+                    price:"",
+                    deposit:"",
+                    carname:"",
+                    role:"admin",
+                    status:true,
                 }
             }
         },

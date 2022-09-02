@@ -1,23 +1,20 @@
 <template>
   <el-dialog v-dialogDrag :title="dialogTitle" :close-on-click-modal="false" width="30%" ref="dialogView" append-to-body :before-close="onBeforeClose" :visible.sync="visible">
         <el-form :model="formData" ref="formData" :rules="formRule" label-width="100px">
-          <el-form-item prop="username" label="姓名">
-            <el-input v-model="formData.username" size="small" placeholder="请填写姓名"></el-input>
+          <el-form-item prop="type" label="类型">
+            <el-input v-model="formData.type" size="small" placeholder="请填写类型"></el-input>
           </el-form-item>
-            <el-form-item prop="sex" label="性别">
-                <el-switch v-model="formData.sex"  active-color="#13ce66"></el-switch>
-            </el-form-item>
-          <el-form-item prop="phone" label="联系方式">
-            <el-input v-model="formData.phone" size="small" placeholder="请填写手机号码"></el-input>
+          <el-form-item prop="color" label="颜色">
+            <el-input v-model="formData.color" size="small" placeholder="请填写颜色"></el-input>
           </el-form-item>
-            <el-form-item prop="email" label="邮箱">
-                <el-input v-model="formData.email" size="small" placeholder="请填写邮箱"></el-input>
-            </el-form-item>
-            <el-form-item prop="idCard" label="身份证号">
-                <el-input v-model="formData.idCard" size="small" placeholder="请填写身份证号"></el-input>
-            </el-form-item>
-          <el-form-item prop="addressCard" label="地址">
-            <el-input v-model="formData.addressCard" size="small" placeholder="请填写地址"></el-input>
+          <el-form-item prop="price" label="价格">
+            <el-input v-model="formData.price" :maxlength="11" size="small" placeholder="请填写价格"></el-input>
+          </el-form-item>
+          <el-form-item prop="deposit" label="押金">
+            <el-input v-model="formData.deposit" size="small" placeholder="请填写押金"></el-input>
+          </el-form-item>
+          <el-form-item prop="addressCard" label="车名">
+            <el-input v-model="formData.addressCard" size="small" placeholder="请填写车名"></el-input>
           </el-form-item>
           <el-form-item prop="status" label="状态">
             <el-switch v-model="formData.status"  active-color="#13ce66"></el-switch>
@@ -30,8 +27,7 @@
   </el-dialog>
 </template>
 <script>
-import {getUserInfo, updateUser} from '@api/user.js'
-import {insertUser} from "../../../api/user";
+import {insertCar, updateCar} from '@api/car.js'
 export default {
   data() {
     return {
@@ -40,26 +36,18 @@ export default {
       loadingStatus: false,
       dialogTitle:"",
       formData:{
-        user_id:null,
-        user_name:"",
-        sex:"",
-        phone:"",
-        email:"",
-        id_card:"",
-        address:"",
-        create_time:"",
-        uodate_time:"",
-        role:"user",
+        car_id:null,
+        type:"",
+        color:"",
+        price:"",
+        deposit:"",
+        carname:"",
+        role:"admin",
         status:true,
       },
       formRule:{
-        name:[{ required: true, message: '请填写姓名', trigger: 'blur' }],
-        phone:[{ required: true, message: '请填写联系方式', trigger: 'blur' }],
-        idCard:[
-            { required: true, message: '请填写身份证号', trigger: 'blur' },
-            { min: 15, max: 18, message: '身份证号填写不正确', trigger: 'blur' }
-        ],
-        addressCard:[{ required: true, message: '请填写身份证地址', trigger: 'blur' }],
+        deposit:[{ required: true, message: '请填写押金', trigger: 'blur' }],
+        price:[{ required: true, message: '请填写价格', trigger: 'blur' }],
       },
     }
   },
@@ -85,7 +73,7 @@ export default {
           var formData = this.formData;
           this.loadingStatus = true;
           if(formData.id){
-            updateUser(formData).then(res => {
+            updateCar(formData).then(res => {
               this.loadingStatus = false;
               this.$message.success("修改成功")
               this.$refs.dialogView.handleClose()
@@ -94,7 +82,7 @@ export default {
               this.loadingStatus = false;
             })
           }else{
-            insertUser(formData).then(res => {
+            insertCar(formData).then(res => {
               this.loadingStatus = false;
               this.$message.success("添加成功")
               this.$refs.dialogView.handleClose()

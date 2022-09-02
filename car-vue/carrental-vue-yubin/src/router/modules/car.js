@@ -1,13 +1,13 @@
 import layout from "@src/layout"
-var per = "user-"
+var per = "car-"
 export default {
-    path:'/user',
-    name:'user',
+    path:'/car',
+    name:'car',
     redirect:{
-        name:'user'
+        name:'car'
     },
     meta:{
-        title:'普通用户',
+        title:'汽车管理',
     },
     component:layout,
     children:[
@@ -15,10 +15,10 @@ export default {
             path:'list',
             name:`${per}list`,
             meta:{
-                title:'用户信息',
+                title:'汽车管理',
                 auth:true,
             },
-            component:()=>import("@view/user/list"),
+            component:()=>import("@view/car/list"),
         },
     ]
 

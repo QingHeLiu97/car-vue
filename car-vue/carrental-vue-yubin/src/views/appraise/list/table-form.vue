@@ -3,20 +3,15 @@
         <el-form @submit.native.prevent :inline="false" :model="formData" ref="formData" label-width="100px">
           <el-row>
             <el-col :span="6">
-              <el-form-item label="姓名" prop="username">
-                  <el-input v-model="formData.username" size="small" clearable placeholder="请输入业主姓名"></el-input>
+              <el-form-item label="创建人" prop="create_by">
+                  <el-input v-model="formData.create_by" size="small" clearable placeholder="请输入创建人"></el-input>
               </el-form-item>
             </el-col>
-            <el-col :span="6">
-              <el-form-item label="手机号" prop="phone">
-                  <el-input v-model="formData.phone" size="small" clearable placeholder="请输入手机号"></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col :span="6">
-              <el-form-item label="身份证号" prop="idCard">
-                  <el-input v-model="formData.id_card" size="small" clearable placeholder="请输入身份证号"></el-input>
-              </el-form-item>
-            </el-col>
+              <el-col :span="6">
+                  <el-form-item label="评价等级" prop="level">
+                      <el-input v-model="formData.level" size="small" clearable placeholder="请输入评价等级"></el-input>
+                  </el-form-item>
+              </el-col>
             <el-col :span="6">
               <el-form-item label="状态" prop="status">
                   <el-select v-model="formData.status" size="small" clearable style="width:100%;" placeholder="请选择状态">
@@ -40,9 +35,8 @@
         data () {
             return {
                 formData: {
-                    name: '',
-                    phone: '',
-                    id_card: '',
+                    create_by: '',
+                    level: '',
                     status: '',
                 }
             }

@@ -7,7 +7,7 @@ module.exports = {
     lintOnSave: Setting.lintOnSave,
     publicPath: Setting.publicPath,
     devServer: {
-        port: 8192,
+        port: 8002,
         open: true,
         publicPath: Setting.publicPath,
         proxy: {
@@ -16,7 +16,7 @@ module.exports = {
                 changeOrigin: true,
                 secure: true, // 如果是HTTP请求则配置这个参数
                 pathRewrite: {
-                    '^/localhost': '/'
+                    '^/localhost': ''
                 }
             }
         }

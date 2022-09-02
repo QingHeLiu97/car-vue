@@ -1,9 +1,7 @@
 import layout from '@src/layout'
 import admin from './modules/admin'
-import custom from './modules/user'
+import user from './modules/user'
 import system from './modules/system'
-import servicing from './modules/servicing'
-import contribution from './modules/contribution'
 const loginIn = [
     {
       path: '/',
@@ -27,7 +25,9 @@ const loginIn = [
         }
       ]
     },
-
+    admin,
+    system,
+    user
 
 ]
 

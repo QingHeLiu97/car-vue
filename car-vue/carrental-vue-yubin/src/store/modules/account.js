@@ -1,5 +1,5 @@
 import { accountAuthLogin } from '@api/account'
-import { getUserUpdate } from '@api/user'
+import { updateUser } from '@api/user'
 import cache from '@src/libs/util.cache.js'
 import Setting from '@src/setting'
 export default {
@@ -27,15 +27,10 @@ export default {
         }
     },
     actions: {
-        /**
-         * @description 用户登录
-         * @param {String} username 用户名
-         * @param {String} pwd 密码
-         * @param {String} code 验证码
-         * **/
-        accountLogin ({ state, commit, dispatch }, { residential = '', password = '' }) {
+
+        accountLogin ({ state, commit, dispatch }, { username = '', password = '' }) {
             return new Promise((resolve, reject) => {
-                accountAuthLogin({ password, residential }).then(async res => {
+                accountAuthLogin({ password, username }).then(async res => {
                     await commit('setRole', res.result.role)
                     await commit('setToken', res.result.token)
                     await commit('setUserInfo', res.result)
@@ -51,12 +46,12 @@ export default {
          * **/
          accountAuthUpdate ({ state, commit, dispatch }, data) {
             return new Promise((resolve, reject) => {
-                getUserUpdate(data).then(async res => {
+                updateUser(data).then(async res => {
                     if (data.password) {
                         await dispatch('accountLogout')
                     } else {
                         state.userInfo.name = data.name;
-                        state.userInfo.residential = data.residential;
+                        state.userInfo.username = data.username;
                         state.userInfo.phone = data.phone;
                         await commit('setUserInfo', state.userInfo)
                     }

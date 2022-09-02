@@ -1,6 +1,5 @@
 import user from './modules/user.js'
 import admin from './modules/admin.js'
-import superAdmin from './modules/superAdmin.js'
 export default [
     {
         id: 'home',
@@ -24,6 +23,5 @@ export default [
         name: '首页'
     },
     ...admin,
-    ...superAdmin,
     ...user
 ]

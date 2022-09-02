@@ -1,44 +1,37 @@
 export default [
     {
-        id: 'admin-user',
-        path: '/admin/user',
+        id: 'admin-list',
+        path: '/admin/list',
         name: '用户管理',
         role: 'admin',
-        icon: 'el-icon-s-solid'
+        icon: 'el-icon-s-tools'
     },
     {
         id: 'admin-car',
         path: '/admin/car',
         name: '汽车管理',
         role: 'admin',
-        icon: 'el-icon-s-cooperation'
+        icon: 'el-icon-s-tools'
     },
     {
-        id: 'notice',
-        path: '/notice',
-        icon: 'el-icon-message-on',
+        id: 'admin-notice',
+        path: '/admin/notice',
+        icon: 'el-icon-s-tools',
         role: 'admin',
         name: '公告管理'
     },
     {
-        id: 'evaluation',
-        path: '/notice/evaluation',
-        icon: 'el-icon-star-on',
+        id: 'admin-appraise',
+        path: '/admin/appraise',
+        icon: 'el-icon-s-tools',
         role: 'admin',
         name: '评价管理'
     },
-    // {
-    //     id: 'payfree',
-    //     path: '/admin/payfree',
-    //     name: '发布缴费',
-    //     role: 'admin',
-    //     icon: 'el-icon-message-solid'
-    // },
     {
         id: 'admin-order',
         path: '/admin/order',
+        icon: 'el-icon-s-tools',
         name: '订单管理',
-        role: 'admin',
-        icon: 'el-icon-s-order',
+        role: 'admin'
     }
 ]

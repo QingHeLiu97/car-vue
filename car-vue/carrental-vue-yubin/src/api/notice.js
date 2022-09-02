@@ -3,13 +3,13 @@ import request from '@src/plugins/request'
 //  查看消息列表
 export const getNoticeList = function (data) {
     return request({
-        url: '/notice/pages',
-        method: 'GET',
+        url: '/notice/list',
+        method: 'POST',
         params: data
     })
 }
 // 添加公告
-export const insetNotice = function (data) {
+export const insertNotice = function (data) {
     return request({
         url: '/notice/insert',
         method: 'POST',
@@ -28,7 +28,7 @@ export const updateNotice = function (data) {
 export const deleteNotice = function (data) {
     return request({
         url: '/notice/delete',
-        method: 'GET',
+        method: 'POST',
         params: data
     })
 }

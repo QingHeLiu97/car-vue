@@ -4,10 +4,10 @@
             <!-- <img style="width:200px;height:200px" src="@src/assets/logo.png" alt=""> -->
         </div>
         <div class="a-login-body">
-            <h3 style="text-align:center;font-size:25px; font-weight: 500;">金象社区物业管理系统</h3>
+            <h3 style="text-align:center;font-size:25px; font-weight: 500;">汽车租赁管理系统</h3>
             <el-form @keyup.enter.native="handleLogin('formData')" :model="formData" status-icon :rules="rules" label-width="70px" ref="formData">
-                <el-form-item label="账号" prop="residential">
-                    <el-input type="text" :maxlength="15" placeholder="请输入登录账号"  v-model="formData.residential"></el-input>
+                <el-form-item label="账号" prop="username">
+                    <el-input type="text" :maxlength="15" placeholder="请输入登录账号"  v-model="formData.username"></el-input>
                 </el-form-item>
                 <el-form-item label="密码" prop="password">
                     <el-input :maxlength="15" :show-password="true" placeholder="请输入登录密码" type="password" v-model="formData.password"></el-input>
@@ -49,11 +49,11 @@
                 codeImg: '',
                 inputType: 'password',
                 formData: {
-                    residential: '',
+                    username: '',
                     password: ''
                 },
                 rules: {
-                    residential: [{ required: true, message: '请输入账号', trigger: 'blur' }, { validator: validateName, trigger: 'blur' }],
+                    username: [{ required: true, message: '请输入账号', trigger: 'blur' }, { validator: validateName, trigger: 'blur' }],
                     password: [{ required: true, message: '请输入密码', trigger: 'blur' }, { validator: validatePass, trigger: 'blur' }]
                 }
             }
@@ -74,9 +74,9 @@
                 that.loadingStatus = true;
                 that.$refs[name].validate((vail) => {
                     if (vail) {
-                        var { password, residential } = that.formData;
+                        var { password, username } = that.formData;
                         // pwd = that.$md5(pwd);
-                        that.accountLogin({ password, residential }).then(res => {
+                        that.accountLogin({ password, username }).then(res => {
                             if (that.$route.query.redirect) {
                                 var menuList = that.$store.state.menu.menuList;
                                 var toPage = getMenuItem(that.$route.query.redirect, menuList) ? that.$route.query.redirect : '/';

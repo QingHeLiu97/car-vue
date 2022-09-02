@@ -1,19 +1,18 @@
 <template>
   <el-card v-loading="loadingStatus" shadow="never">
     <div style="margin-bottom:20px">
-      <el-button type="primary" size="small" @click="handleCreate">新增用户</el-button>
+      <el-button type="primary" size="small" @click="handleCreate">新增业主</el-button>
     </div>
     <el-table :data="tableData" border style="width: 100%" >
-      <el-table-column header-align-="center" align="center" min-width="100" prop="id" label="ID"></el-table-column>
-      <el-table-column header-align-="center" align="center" min-width="200" prop="user_id" label="用户编号"></el-table-column>
-      <el-table-column header-align-="center" align="center" min-width="100" prop="username" label="姓名"></el-table-column>
-      <el-table-column header-align-="center" align="center" min-width="150" prop="sex" label="性别"></el-table-column>
-      <el-table-column header-align-="center" align="center" min-width="150" prop="phone" label="手机号"></el-table-column>
-      <el-table-column header-align-="center" align="center" min-width="150" prop="email" label="用户邮箱"></el-table-column>
-      <el-table-column header-align-="center" align="center" min-width="200" prop="id_card" label="身份证号"></el-table-column>
-      <el-table-column header-align-="center" align="center" min-width="200" prop="create_time" label="创建时间"></el-table-column>
+      <el-table-column header-align-="center" align="center" min-width="200" prop="car_id" label="编号"></el-table-column>
+      <el-table-column header-align-="center" align="center" min-width="200" prop="type" label="类型"></el-table-column>
+      <el-table-column header-align-="center" align="center" min-width="100" prop="color" label="颜色"></el-table-column>
+      <el-table-column header-align-="center" align="center" min-width="150" prop="price" label="价格"></el-table-column>
+      <el-table-column header-align-="center" align="center" min-width="200" prop="deposit" label="押金"></el-table-column>
+      <el-table-column header-align-="center" align="center" min-width="200" prop="carname" label="车名"></el-table-column>
+      <el-table-column header-align-="center" align="center" min-width="200" prop="createTime" label="创建时间"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="200" prop="update_time" label="更新时间"></el-table-column>
-      <el-table-column header-align-="center" align="center" min-width="100" prop="status" label="状态">
+        <el-table-column header-align-="center" align="center" min-width="100" prop="status" label="状态">
         <template slot-scope="{row}">
           <el-tag type="success" size="small" v-if="row.status == 1">正常</el-tag>
           <el-tag type="info" size="small" v-else>禁用</el-tag>
@@ -21,10 +20,6 @@
       </el-table-column>
       <el-table-column header-align="center" align="center" fixed="right"  width="250" label="操作">
         <template slot-scope="{row}">
-             <!-- <el-button type="default" size="small">查看</el-button> -->
-			 <el-popconfirm placement="top" title="确定要重置密码吗？" @confirm="handleRestPassword(row)">
-			  <el-button slot="reference" type="default" size="small" style="margin-right:10px">重置密码</el-button>
-			 </el-popconfirm>
              <el-button type="primary" size="small" @click="handleEdit(row)">编辑</el-button>
              <el-popconfirm placement="top" title="确定要删除这条数据吗" @confirm="handleDele(row)">
               <el-button slot="reference" type="danger" size="small" style="margin-left:10px">删除</el-button>
@@ -48,8 +43,8 @@
   </el-card>
 </template>
 <script>
-    import { getUserList,deleteUser} from '@api/user.js'
     import tableEdti from './table-edte.vue'
+    import {deleteCar, getCarList, updateCar} from "../../../api/car";
     export default {
         components: { tableEdti },
         data () {
@@ -63,12 +58,13 @@
             }
         },
         methods: {
+            // 获取数据
             getData () {
                 this.loadingStatus = true
                 var pageSize = this.pageSize
                 var current = this.currentPage
                 var formData = this.$parent.$refs.tableForm.formData;
-                getUserList({ current, pageSize, role: 'user', ...formData }).then(res => {
+                getCarList({ current, pageSize, role: 'custom', ...formData }).then(res => {
                     this.total = res.result.total;
                     this.tableData = res.result.records;
                     this.loadingStatus = false;
@@ -77,13 +73,13 @@
                 })
             },
             handleCreate () {
-                this.$refs.tableEdti.open(undefined, '新增用户')
+                this.$refs.tableEdti.open(undefined, '发布车源')
             },
             handleEdit (row) {
-                this.$refs.tableEdti.open(row, '修改用户')
+                this.$refs.tableEdti.open(row, '修改车辆信息')
             },
             handleDele (row) {
-                deleteUser({ id: row.id }).then(res => {
+                deleteCar({ id: row.id }).then(res => {
                     this.getData();
                 }).catch(err => {
 

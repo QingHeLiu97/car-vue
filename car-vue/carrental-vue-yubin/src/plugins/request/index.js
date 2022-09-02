@@ -47,7 +47,7 @@ service.interceptors.response.use(
     response => {
         // 请求完成
         var responseData = response.data;
-        const fullPath = ""
+        let fullPath = ""
         switch (responseData.code) {
             case "200": return responseData;
             case "430":// 登陆失效
