@@ -1,8 +1,8 @@
 import layout from '@src/layout'
 const pre = 'system-'
 export default {
-    path: '/user',
-    name: 'userInfo',
+    path: '/system',
+    name: 'system',
     redirect: {
         name: `${pre}userInfo`
     },

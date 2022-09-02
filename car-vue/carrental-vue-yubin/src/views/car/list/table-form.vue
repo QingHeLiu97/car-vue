@@ -40,14 +40,14 @@
         data () {
             return {
                 formData: {
-                    car_id:null,
-                    type:"",
-                    color:"",
-                    price:"",
-                    deposit:"",
-                    carname:"",
-                    role:"admin",
-                    status:true,
+                    carId: null,
+                    type: "",
+                    color: "",
+                    price: "",
+                    deposit: "",
+                    carname: "",
+                    role: "admin",
+                    status: true,
                 }
             }
         },

@@ -55,7 +55,16 @@ export default {
                 auth: true
             },
             component: () => import('@view/order/list')
-        }
+        },
+        {
+            path:'self',
+            name:`${per}self`,
+            meta:{
+                title:'个人信息',
+                auth:true,
+            },
+            component:()=>import("@view/system/userInfo"),
+        },
     ]
 
 }

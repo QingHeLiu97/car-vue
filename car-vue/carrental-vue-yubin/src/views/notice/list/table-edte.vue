@@ -10,12 +10,17 @@
           <el-form-item prop="content" label="内容">
                 <el-input type="textarea" size="small" placeholder="请填写内容" resize="none" :rows="6" v-model="formData.content"></el-input>
           </el-form-item>
-          <el-form-item prop="status" label="状态">
-            <el-switch v-model="formData.status" :inactive-value="0" :active-value="1" active-color="#13ce66"></el-switch>
-          </el-form-item>
+            <el-form-item prop="status" label="状态">
+                <el-switch    v-model="formData.status"
+                              class="switch"
+                              active-value="1"
+                              inactive-value="0"
+                              active-text="封禁"
+                              inactive-text="正常"></el-switch>
+            </el-form-item>
           <el-form-item>
                 <el-button type="primary" size="small" :loading="loadingStatus" @click="onSubmit" >提交</el-button>
-                <el-button type="default" size="small" :loading="loadingStatus">取消</el-button>
+                <el-button type="default" size="small" :loading="loadingStatus" @click="$refs.dialogView.handleClose()">取消</el-button>
           </el-form-item>
         </el-form>
   </el-dialog>
@@ -30,10 +35,11 @@
                 loadingStatus: false,
                 dialogTitle: '',
                 formData: {
-                    id: null,
+                    noticeId: null,
                     title: '',
+                    autor: "",
                     content: '',
-                    status: 1
+                    status: "",
                 },
                 formRule: {
                     title: [{ required: true, message: '请填写标题', trigger: 'blur' }],
@@ -62,13 +68,14 @@
                     if (vali) {
                         var formData = this.formData;
                         this.loadingStatus = true;
-                        if (formData.id) {
+                        if (formData.noticeId) {
                             updateNotice(formData).then(res => {
                                 this.loadingStatus = false;
                                 this.$message.success('修改成功')
                                 this.$refs.dialogView.handleClose()
                                 this.$emit('onSuccess')
                             }).catch(err => {
+                                console.log("更新失败", err)
                                 this.loadingStatus = false;
                             })
                         } else {
@@ -78,6 +85,7 @@
                                 this.$refs.dialogView.handleClose()
                                 this.$emit('onSuccess')
                             }).catch(err => {
+                                console.log("添加失败", err)
                                 this.loadingStatus = false;
                             })
                         }

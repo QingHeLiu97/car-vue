@@ -11,8 +11,10 @@ module.exports = {
     parser: 'babel-eslint'
   },
   rules: {
-    "semi": [0],
+    "semi": 'off',
     'indent': 'off',
+     'quotes': 'off',
+     'comma-dangle': 'off',
     'vue/script-indent': [
       'error',
       4,

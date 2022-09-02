@@ -1,25 +1,25 @@
 <template>
   <el-card v-loading="loadingStatus" shadow="never">
-    <div style="margin-bottom:20px">
+    <div style="margin-bottom:20px" v-if="userInfo.role =='user'">
       <el-button type="primary" size="small" @click="handleCreate">新增评价</el-button>
     </div>
     <el-table :data="tableData" border style="width: 100%" >
-      <el-table-column header-align-="center" align="center" min-width="100" prop="appr_id" label="编号"></el-table-column>
+      <el-table-column header-align-="center" align="center" min-width="100" prop="apprId" label="编号"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="200" prop="content" label="评价内容"></el-table-column>
-      <el-table-column header-align-="center" align="center" min-width="100" prop="create_by" label="评价人"></el-table-column>
+      <el-table-column v-if="userInfo.role == 'admin'" header-align-="center" align="center" min-width="100" prop="createBy" label="评价人"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="200" prop="createTime" label="创建时间"></el-table-column>
-      <el-table-column header-align-="center" align="center" min-width="200" prop="update_time" label="更新时间"></el-table-column>
+      <el-table-column header-align-="center" align="center" min-width="200" prop="updateTime" label="更新时间"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="100" prop="status" label="状态">
         <template slot-scope="{row}">
-          <el-tag type="success" size="small" v-if="row.status == 1">正常</el-tag>
+          <el-tag type="success" size="small" v-if="row.status == 0">正常</el-tag>
           <el-tag type="info" size="small" v-else>禁用</el-tag>
         </template>
       </el-table-column>
       <el-table-column header-align="center" align="center" fixed="right"  width="250" label="操作">
         <template slot-scope="{row}">
-             <el-button type="primary" size="small" @click="handleEdit(row)">编辑</el-button>
+             <el-button v-if="userInfo.role == 'user'" type="primary" size="small" @click="handleEdit(row)">编辑</el-button>
              <el-popconfirm placement="top" title="确定要删除这条数据吗" @confirm="handleDele(row)">
-              <el-button slot="reference" type="danger" size="small" style="margin-left:10px">删除</el-button>
+              <el-button slot="reference" type="danger" :disabled="row.status==1" size="small" style="margin-left:10px">删除</el-button>
              </el-popconfirm>
         </template>
       </el-table-column>
@@ -41,7 +41,8 @@
 </template>
 <script>
     import tableEdti from './table-edte.vue'
-    import {getAppraiseList} from "../../../api/appraise";
+    import { getAppraiseList, deleteAppraise } from '@api/appraise.js'
+    import {mapState , mapActions} from "vuex";
     export default {
         components: { tableEdti },
         data () {
@@ -54,32 +55,26 @@
                 pageSizes: [10, 20, 30, 40] // 每条总数配置
             }
         },
+        computed: {
+            ...mapState('account', ['userInfo', 'role'])
+        },
         methods: {
             // 获取数据
             getData () {
                 this.loadingStatus = true
-                var pageSize = this.pageSize
-                var current = this.currentPage
+                var role = this.userInfo.role
+                var phone = this.userInfo.phone
                 var formData = this.$parent.$refs.tableForm.formData;
-                getAppraiseList({ current, pageSize, role: 'user', ...formData }).then(res => {
-                    this.total = res.result.total;
-                    this.tableData = res.result.records;
+                getAppraiseList({ role: role,phone: phone , ...formData }).then(res => {
+                    this.tableData = res.result
                     this.loadingStatus = false;
                 }).catch(err => {
                     this.loadingStatus = false
                 })
             },
-            // 重置密码
-            handleRestPassword (row) {
-                getUserUpdate({ id: row.id, password: '123456' }).then(res => {
-                    this.$message.success('密码重置成功')
-                }).catch(err => {
-
-                })
-            },
             // 新增用户
             handleCreate () {
-                this.$refs.tableEdti.open(undefined, '新增业主')
+                this.$refs.tableEdti.open(undefined, '新增评价')
             },
             // 编辑
             handleEdit (row) {
@@ -87,10 +82,10 @@
             },
             // 删除
             handleDele (row) {
-                deleteAppraise({ id: row.id }).then(res => {
+                deleteAppraise({ apprId: row.apprId }).then(res => {
                     this.getData();
                 }).catch(err => {
-
+                    console.log("删除失败", err)
                 })
             },
             // 切换每页行数

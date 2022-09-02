@@ -4,7 +4,7 @@ export const insertCar = function (data) {
     return request({
         url: '/car/add',
         method: 'POST',
-        data
+        params: data
     })
 }
 
@@ -12,7 +12,7 @@ export const deleteCar = function (data) {
     return request({
         url: '/car/delete',
         method: 'POST',
-        data
+        params: data
     })
 }
 
@@ -21,7 +21,7 @@ export const getCarList = function (data) {
     return request({
         url: '/car/list',
         method: 'POST',
-        data
+        params: data
     })
 }
 
@@ -29,6 +29,6 @@ export const updateCar = function (data) {
     return request({
         url: '/car/update',
         method: 'POST',
-        data
+        params: data
     })
 }

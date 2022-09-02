@@ -1,9 +1,22 @@
 <template>
   <el-dialog v-dialogDrag :title="dialogTitle" :close-on-click-modal="false" width="30%" ref="dialogView" append-to-body :before-close="onBeforeClose" :visible.sync="visible">
-        <el-form :model="formData" ref="formData" :rules="formRule" label-width="100px">
-          <el-form-item prop="create_by" label="姓名">
-            <el-input v-model="formData.username" size="small" placeholder="请填写姓名"></el-input>
-          </el-form-item>
+        <el-form :model="formData" ref="formData" label-width="100px">
+            <el-form-item prop="appraiseId" label="编号">
+            <el-input v-model="formData.appraiseId" size="small" placeholder="请填写编号"></el-input>
+            </el-form-item>
+            <el-form-item prop="content" label="内容">
+                <el-input type="textarea" size="small" placeholder="请填写内容" resize="none" :rows="6" v-model="formData.content"></el-input>
+            </el-form-item>
+            <el-form-item prop="orderList" label="订单ID">
+                <el-select v-model="formData.orderList" placeholder="请选择待评价订单">
+                    <el-option v-for="item in formData.orderList" :key="item.orderId"
+                               :value="item.value">
+                    </el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item prop="level" label="编号">
+                <el-input v-model="formData.level" size="small" placeholder="请填写星级"></el-input>
+            </el-form-item>
           <el-form-item>
                 <el-button type="primary" size="small" :loading="loadingStatus" @click="onSubmit" >提交</el-button>
                 <el-button type="default" size="small" :loading="loadingStatus" @click="$refs.dialogView.handleClose()">取消</el-button>
@@ -12,32 +25,46 @@
   </el-dialog>
 </template>
 <script>
-import {getUserInfo, updateUser} from '@api/user.js'
-import {insetAppraise} from "../../../api/appraise";
-export default {
+    import {insetAppraise} from '@api/appraise.js';
+    import {getOrderListByPhone} from '@api/order.js';
+    import {mapState} from "vuex";
+
+    export default {
   data() {
     return {
       data: {},
       visible: false,
       loadingStatus: false,
-      dialogTitle:"",
+      dialogTitle: "",
       formData:{
-        appraise_id:null,
-        content:"",
-        create_by:"",
-        create_time:"",
-        uodate_time:"",
-        role:"user",
-        level:"user",
-        status:true,
+        appraise_id: null,
+        content: "",
+        createBy: "",
+        createTime: "",
+        uodateTime: "",
+        level: "",
+        status:"",
+        orderList: [],
       },
     }
   },
-  mounted () {
-
-  },
+    computed: {
+        ...mapState('account', ['userInfo', 'role'])
+    },
   methods: {
+    getData(){
+        var phone = this.userInfo.phone
+        getOrderListByPhone({phone: phone}).then(res => {
+            console.log("chengong",res)
+            this.formData.orderList = res.result
+            this.loadingStatus = false;
+        }).catch(err => {
+            this.loadingStatus = false
+        })
+    },
+
     open(row,title) {
+        this.getData()
         this.visible = true;
         this.dialogTitle = title;
         if(row){

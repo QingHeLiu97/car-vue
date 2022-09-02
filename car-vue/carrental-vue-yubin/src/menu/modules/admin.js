@@ -33,5 +33,12 @@ export default [
         icon: 'el-icon-s-tools',
         name: '订单管理',
         role: 'admin'
+    },
+    {
+        id: 'admin-self',
+        path: '/admin/self',
+        icon: 'el-icon-s-tools',
+        name: '个人信息',
+        role: 'admin'
     }
 ]

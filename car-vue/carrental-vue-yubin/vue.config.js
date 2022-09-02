@@ -4,7 +4,7 @@ const { resolve } = require('path')
 module.exports = {
     outputDir: Setting.outputDir,
     assetsDir: Setting.assetsDir,
-    lintOnSave: Setting.lintOnSave,
+    lintOnSave: false,
     publicPath: Setting.publicPath,
     devServer: {
         port: 8002,
