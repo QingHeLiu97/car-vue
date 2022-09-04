@@ -2,7 +2,7 @@ import request from '@src/plugins/request'
 
 export const insertCar = function (data) {
     return request({
-        url: '/car/add',
+        url: '/car/insert',
         method: 'POST',
         params: data
     })

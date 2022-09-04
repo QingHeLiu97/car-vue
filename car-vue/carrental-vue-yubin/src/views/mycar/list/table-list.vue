@@ -6,8 +6,9 @@
     <el-table :data="tableData" border style="width: 100%" >
       <el-table-column header-align-="center" align="center" min-width="200" prop="carId" label="编号"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="200" prop="type" label="类型"></el-table-column>
+      <el-table-column header-align-="center" align="center" min-width="300" prop="carCircle" label="汽车图片"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="100" prop="color" label="颜色"></el-table-column>
-      <el-table-column header-align-="center" align="center" min-width="100" prop="userPhone" label="颜色"></el-table-column>
+      <el-table-column header-align-="center" align="center" min-width="250" prop="userPhone" label="用户手机号码"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="150" prop="price" label="价格"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="200" prop="deposit" label="押金"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="200" prop="carname" label="车名"></el-table-column>
@@ -46,7 +47,7 @@
 <script>
     import tableEdti from './table-edte.vue'
     import { deleteCar, getCarList } from "../../../api/car";
-    import {mapState , mapActions} from "vuex";
+    import {mapState } from "vuex";
     export default {
         components: { tableEdti },
         data () {
@@ -56,7 +57,6 @@
                 total: 0, // 总条数
                 pageSize: 10, // 每条总数
                 currentPage: 1, // 当前页
-                roles: userInfo.role,
                 pageSizes: [10, 20, 30, 40] // 每条总数配置
             }
         },

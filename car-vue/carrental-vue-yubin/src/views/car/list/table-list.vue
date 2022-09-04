@@ -6,6 +6,7 @@
     <el-table :data="tableData" border style="width: 100%" >
       <el-table-column header-align-="center" align="center" min-width="200" prop="carId" label="编号"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="200" prop="type" label="类型"></el-table-column>
+      <el-table-column header-align-="center" align="center" min-width="300" prop="carCircle" label="汽车图片"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="100" prop="color" label="颜色"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="150" prop="price" label="价格"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="200" prop="deposit" label="押金"></el-table-column>
@@ -18,7 +19,7 @@
           <el-tag type="info" size="small" v-else>已出租</el-tag>
         </template>
       </el-table-column>
-      <el-table-column  header-align="center" align="center" fixed="right"  width="300" label="操作">
+      <el-table-column  header-align="center" align="center" fixed="right"  width="200" label="操作">
         <template slot-scope="{row}"  >
             <el-button v-if="userInfo.role == 'admin'"  type="primary" size="small" @click="handleEdit(row)">编辑</el-button>
             <el-popconfirm placement="top" title="确定要删除这条数据吗" @confirm="handleDele(row)">
@@ -46,7 +47,7 @@
 <script>
     import tableEdti from './table-edte.vue'
     import { deleteCar, getCarList } from "../../../api/car";
-    import {mapState , mapActions} from "vuex";
+    import {mapState } from "vuex";
     export default {
         components: { tableEdti },
         data () {

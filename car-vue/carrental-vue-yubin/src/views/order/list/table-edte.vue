@@ -7,6 +7,9 @@
           <el-form-item prop="car_type" label="汽车类型">
             <el-input v-model="formData.carType" size="small" placeholder="请填写汽车类型"></el-input>
           </el-form-item>
+            <el-form-item prop="carCircle" label="汽车类型">
+               <img :src="formData.carCircle" size="small" class="el-avatarer">
+            </el-form-item>
           <el-form-item prop="car_price" label="租车价格">
             <el-input v-model="formData.carPrice" :maxlength="11" size="small" placeholder="请填写租车价格"></el-input>
           </el-form-item>
@@ -62,8 +65,8 @@ export default {
         userPhone:"",
         userAddress:"",
         handlresName:"",
+        carCircle: "",
         createTime:"",
-        role:"admin",
         status:"",
       }
     }

@@ -4,6 +4,31 @@
           <el-form-item prop="type" label="类型">
             <el-input v-model="formData.type" size="small" placeholder="请填写类型"></el-input>
           </el-form-item>
+          <el-form-item prop="carCircle" label="上传图片">
+              <el-upload
+                  v-model = "formData.carCircle"
+                  ref="upload"
+                  action=""
+                  list-type="picture-card"
+                  :on-preview="handlePictureCardPreview"
+                  :on-remove="handleRemove"
+                  :on-change="UploadImage"
+                  :limit="1"
+                  :file-list="fileList"
+                  :auto-upload="false"
+              >
+                  <i class="el-icon-plus"></i>
+                  <template #tip>
+                      <div style="font-size: 12px;color: #919191;">
+                          单次限制上传一张图片
+                      </div>
+                  </template>
+              </el-upload>
+
+              <el-dialog v-model="dialogVisible" style="line-height: 0;">
+                  <img style="width: 100%;height: 100%"  :src="formData.carCircle" alt="" />
+              </el-dialog>
+          </el-form-item>
           <el-form-item prop="color" label="颜色">
             <el-input v-model="formData.color" size="small" placeholder="请填写颜色"></el-input>
           </el-form-item>
@@ -14,13 +39,11 @@
             <el-input v-model="formData.deposit" size="small" placeholder="请填写押金"></el-input>
           </el-form-item>
           <el-form-item prop="carname" label="车名">
-            <el-input v-model="formData.carname" size="small" placeholder="请填写车名"></el-input>
+            <el-input v-model="formData.carname" size="small" placeholder="请给你爱车起个名字"></el-input>
           </el-form-item>
-            <el-form-item prop="userPhone" label="车主联系方式">
-                <el-input v-model="formData.userPhone" size="small" placeholder="请填写车名"></el-input>
-            </el-form-item>
           <el-form-item prop="status" label="状态">
               <el-switch    v-model="formData.status"
+                            action=""
                             class="switch"
                             active-value="1"
                             inactive-value="0"
@@ -40,6 +63,8 @@ import {getCarList} from "../../../api/car";
 export default {
   data() {
     return {
+      fileList:[],
+      dialogVisible: false,
       data: {},
       visible: false,
       loadingStatus: false,
@@ -81,9 +106,11 @@ export default {
       this.$refs.formData.validate((vali) => {
         if (vali) {
           var formData = this.formData;
+          var role = this.userInfo.role
+          var phone = this.userInfo.phoone
           this.loadingStatus = true;
           if(formData.carId){
-            updateCar(formData).then(res => {
+            updateCar({  role:role,phone: phone, ...formData }).then(res => {
               this.loadingStatus = false;
               this.$message.success("修改成功")
               this.$refs.dialogView.handleClose()
@@ -101,7 +128,7 @@ export default {
               this.loadingStatus = false;
             })
           }else{
-            insertCar(formData).then(res => {
+            insertCar({  role:role,phone: phone, ...formData }).then(res => {
               this.loadingStatus = false;
               this.$message.success("添加成功")
               this.$refs.dialogView.handleClose()
@@ -121,6 +148,31 @@ export default {
         deno();
       })
     },
+
+      //上传图片的方法
+      UploadImage(file,filelist) {
+          console.log(file);
+          let fd = new FormData()
+          fd.append('file', file.raw) //传给后台接收的名字 file
+          this.$axios.post('/localhost/upload/image', fd, {headers: {'Content-Type': 'multipart/form-data'}}).then(response => {
+              //上传成功后返回的数据,
+              console.log("上传图片到:"+response.data);
+              // 将图片地址给到表单.
+              this.formData.carCircle = response.data
+          })
+
+      },
+      //移除图片功能
+      handleRemove(file, fileList) {
+          console.log(file, fileList)
+
+      },
+      //预览图片功能
+      handlePictureCardPreview(file) {
+          console.log(file.url);
+          this.dialogVisible = true
+          this.formData.carCircle = file.url
+      }
   }
 };
 </script>

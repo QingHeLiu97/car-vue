@@ -46,7 +46,6 @@
                     price: "",
                     deposit: "",
                     carname: "",
-                    role: "admin",
                     status: true,
                 }
             }

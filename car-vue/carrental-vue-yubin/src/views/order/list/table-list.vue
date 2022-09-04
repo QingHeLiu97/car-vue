@@ -6,6 +6,7 @@
     <el-table :data="tableData" border style="width: 100%" >
       <el-table-column header-align-="center" align="center" min-width="200" prop="orderId" label="编号"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="200" prop="carId" label="汽车id"></el-table-column>
+      <el-table-column header-align-="center" align="center" min-width="200" prop="carCircle" label="汽车图片"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="200" prop="carType" label="汽车类型"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="200" prop="carColor" label="汽车颜色"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="150" prop="carPrice" label="价格"></el-table-column>
@@ -49,6 +50,7 @@
 <script>
     import tableEdti from './table-edte.vue'
     import {deleteOrder, getOrderList} from "../../../api/order";
+    import {mapState} from "vuex";
     export default {
         components: { tableEdti },
         data () {
@@ -61,14 +63,20 @@
                 pageSizes: [10, 20, 30, 40] // 每条总数配置
             }
         },
+        computed: {
+            ...mapState('account', ['userInfo', 'role'])
+        },
         methods: {
             // 获取数据
             getData () {
                 this.loadingStatus = true
+                var roles = this.userInfo.role
+                var phone = this.userInfo.phone
+                console.log("用户信息",roles,phone)
                 var pageSize = this.pageSize
                 var current = this.currentPage
                 var formData = this.$parent.$refs.tableForm.formData;
-                getOrderList({ current, pageSize, role: 'custom', ...formData }).then(res => {
+                getOrderList({  role: roles ,phone: phone , ...formData }).then(res => {
                     console.log(res)
                     this.tableData = res.result;
                     this.loadingStatus = false;

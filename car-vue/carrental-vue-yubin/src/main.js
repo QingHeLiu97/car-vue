@@ -6,7 +6,7 @@ import router from './router'
 import store from './store'
 // Axios
 import axios from 'axios'
-
+Vue.prototype.$axios = axios
 // 混合
 import mixinApp from '@src/mixins/app';
 // 过滤器
