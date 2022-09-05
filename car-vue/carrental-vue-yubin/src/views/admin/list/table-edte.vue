@@ -1,9 +1,9 @@
 <template>
   <el-dialog v-dialogDrag :title="dialogTitle" :close-on-click-modal="false" width="30%" ref="dialogView" append-to-body :before-close="onBeforeClose" :visible.sync="visible">
         <el-form :model="formData" ref="formData" :rules="formRule" label-width="100px">
-          <el-form-item prop="userId" label="编号">
-            <el-input v-model="formData.userId" size="small"  :disabled="true"></el-input>
-          </el-form-item>
+<!--          <el-form-item prop="userId" label="编号">-->
+<!--            <el-input v-model="formData.userId" size="small"  :disabled="true"></el-input>-->
+<!--          </el-form-item>-->
           <el-form-item prop="username" label="姓名">
             <el-input v-model="formData.username" size="small" placeholder="请填写姓名"></el-input>
           </el-form-item>

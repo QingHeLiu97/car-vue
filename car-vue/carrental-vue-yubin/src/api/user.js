@@ -7,7 +7,7 @@ export const insertUser = function (data) {
         headers: {
             'Content-type': 'multipart/form-data'
         },
-        data
+        params: data
     })
 }
 // 更新
