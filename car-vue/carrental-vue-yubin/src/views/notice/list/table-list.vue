@@ -9,8 +9,8 @@
       <el-table-column header-align-="center" align="center" min-width="100" prop="autor" label="作者"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="150" prop="createTime" label="创建时间"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="200" prop="updateTime" label="更新时间"></el-table-column>
-      <el-table-column header-align="center" align="center" fixed="right"  width="250" label="操作">
-        <template slot-scope="{row}">
+      <el-table-column header-align="center" align="center" fixed="right"  width="250" label="操作" v-if="userInfo.role =='admin'">
+        <template slot-scope="{row}" >
             <el-button type="primary" size="small" @click="handleEdit(row)">编辑</el-button><el-popconfirm placement="top" title="确定要删除这条数据吗" @confirm="handleDele(row)">
             <el-button v-if="row.status == 0" slot="reference" type="danger" size="small" style="margin-left:10px">删除</el-button>
         </el-popconfirm>
@@ -35,6 +35,7 @@
 <script>
     import tableEdti from './table-edte.vue'
     import { deleteNotice, getNoticeList } from "../../../api/notice";
+    import {mapState} from "vuex";
     export default {
         components: { tableEdti },
         data () {
@@ -47,14 +48,19 @@
                 pageSizes: [10, 20, 30, 40] // 每条总数配置
             }
         },
+        computed: {
+            ...mapState('account', ['userInfo', 'role'])
+        },
         methods: {
             // 获取数据
             getData () {
                 this.loadingStatus = true
+                var phone = this.userInfo.phone
+                var role = this.userInfo.role
                 var pageSize = this.pageSize
                 var current = this.currentPage
                 var formData = this.$parent.$refs.tableForm.formData;
-                getNoticeList({ current, pageSize, role: 'custom', ...formData }).then(res => {
+                getNoticeList({ role: role , ...formData }).then(res => {
                     console.log(res.result)
                     this.tableData = res.result;
                     this.loadingStatus = false;

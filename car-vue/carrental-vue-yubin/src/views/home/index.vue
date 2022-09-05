@@ -70,7 +70,8 @@
         },
         methods: {
             getData () {
-                getNoticeList().then(res => {
+                var role = this.userInfo.role
+                getNoticeList({role: role }).then(res => {
                     this.noticeList = res.result;
                 }).catch(err => {})
 

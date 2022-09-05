@@ -1,5 +1,5 @@
 <template>
-    <el-card class="box-card" shadow="never">
+    <el-card class="box-card" shadow="never" hidden>
         <el-form @submit.native.prevent :inline="false" :model="formData" ref="formData" label-width="100px">
           <el-row>
             <el-col :span="6">
@@ -34,11 +34,6 @@
     export default {
         data () {
             return {
-                formData: {
-                    create_by: '',
-                    level: '',
-                    status: '',
-                }
             }
         },
         methods: {

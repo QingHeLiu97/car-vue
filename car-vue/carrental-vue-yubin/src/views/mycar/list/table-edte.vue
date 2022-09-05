@@ -60,6 +60,7 @@
 <script>
 import { insertCar, updateCar } from '@api/car.js'
 import {getCarList} from "../../../api/car";
+import {mapState} from "vuex";
 export default {
   data() {
     return {
@@ -78,7 +79,7 @@ export default {
         deposit:"",
         userPhone:"",
         carname:"",
-        status: "",
+        status: ""
       },
       formRule:{
         deposit:[{ required: true, message: '请填写押金', trigger: 'blur' }],
@@ -89,6 +90,9 @@ export default {
   mounted () {
 
   },
+    computed: {
+        ...mapState('account', ['userInfo', 'role'])
+    },
   methods: {
     open(row,title) {
         this.visible = true;

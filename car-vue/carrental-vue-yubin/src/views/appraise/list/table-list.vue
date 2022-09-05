@@ -64,6 +64,7 @@
                 this.loadingStatus = true
                 var role = this.userInfo.role
                 var phone = this.userInfo.phone
+                console.log(role,phone)
                 var formData = this.$parent.$refs.tableForm.formData;
                 getAppraiseList({ role: role,phone: phone , ...formData }).then(res => {
                     this.tableData = res.result
