@@ -76,6 +76,7 @@ export default {
         type:"",
         color:"",
         price:"",
+        carCircle: "",
         deposit:"",
         userPhone:"",
         carname:"",
@@ -111,7 +112,7 @@ export default {
         if (vali) {
           var formData = this.formData;
           var role = this.userInfo.role
-          var phone = this.userInfo.phoone
+          var phone = this.userInfo.phone
           this.loadingStatus = true;
           if(formData.carId){
             updateCar({  role:role,phone: phone, ...formData }).then(res => {
