@@ -2,7 +2,7 @@
   <el-dialog v-dialogDrag :title="dialogTitle" :close-on-click-modal="false" width="30%" ref="dialogView" append-to-body :before-close="onBeforeClose" :visible.sync="visible">
         <el-form :model="formData" ref="formData" label-width="100px">
             <el-form-item prop="appraiseId" label="编号">
-            <el-input v-model="formData.appraiseId" size="small" placeholder="请填写编号"></el-input>
+            <el-input v-model="formData.apprId" size="small" placeholder="请填写编号"></el-input>
             </el-form-item>
             <el-form-item prop="content" label="内容">
                 <el-input type="textarea" size="small" placeholder="请填写内容" resize="none" :rows="6" v-model="formData.content"></el-input>
@@ -37,14 +37,14 @@
       loadingStatus: false,
       dialogTitle: "",
       formData:{
-        appraise_id: null,
+        apprId: null,
         content: "",
         createBy: "",
         createTime: "",
-        uodateTime: "",
+        updateTime: "",
         level: "",
         status:"",
-        orderList: [],
+        orderList: []
       },
     }
   },
@@ -52,6 +52,7 @@
         ...mapState('account', ['userInfo', 'role'])
     },
   methods: {
+
     getData(){
         var phone = this.userInfo.phone
         getOrderListByPhone({phone: phone}).then(res => {

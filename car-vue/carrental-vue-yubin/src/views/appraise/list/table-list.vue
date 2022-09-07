@@ -42,7 +42,7 @@
 <script>
     import tableEdti from './table-edte.vue'
     import { getAppraiseList, deleteAppraise } from '@api/appraise.js'
-    import {mapState , mapActions} from "vuex";
+    import {mapState } from "vuex";
     export default {
         components: { tableEdti },
         data () {
@@ -62,9 +62,8 @@
             // 获取数据
             getData () {
                 this.loadingStatus = true
-                var role = this.userInfo.role
                 var phone = this.userInfo.phone
-                console.log(role,phone)
+                var role = this.userInfo.role
                 var formData = this.$parent.$refs.tableForm.formData;
                 getAppraiseList({ role: role,phone: phone , ...formData }).then(res => {
                     this.tableData = res.result

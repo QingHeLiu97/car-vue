@@ -4,7 +4,7 @@
           <el-row>
             <el-col :span="6">
               <el-form-item label="创建人" prop="create_by">
-                  <el-input v-model="formData.create_by" size="small" clearable placeholder="请输入创建人"></el-input>
+                  <el-input v-model="formData.createBy" size="small" clearable placeholder="请输入创建人"></el-input>
               </el-form-item>
             </el-col>
               <el-col :span="6">
@@ -34,6 +34,12 @@
     export default {
         data () {
             return {
+                formData: {
+                    apprId: null,
+                    createBy: '',
+                    level: '',
+                    status: "",
+                },
             }
         },
         methods: {
