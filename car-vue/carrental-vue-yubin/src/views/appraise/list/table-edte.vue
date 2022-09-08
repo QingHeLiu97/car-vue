@@ -1,20 +1,21 @@
 <template>
   <el-dialog v-dialogDrag :title="dialogTitle" :close-on-click-modal="false" width="30%" ref="dialogView" append-to-body :before-close="onBeforeClose" :visible.sync="visible">
         <el-form :model="formData" ref="formData" label-width="100px">
-            <el-form-item prop="appraiseId" label="编号">
-            <el-input v-model="formData.apprId" size="small" placeholder="请填写编号"></el-input>
-            </el-form-item>
+<!--            <el-form-item prop="appraiseId" label="编号">-->
+<!--            <el-input v-model="formData.apprId" size="small" placeholder="请填写编号"></el-input>-->
+<!--            </el-form-item>-->
             <el-form-item prop="content" label="内容">
                 <el-input type="textarea" size="small" placeholder="请填写内容" resize="none" :rows="6" v-model="formData.content"></el-input>
             </el-form-item>
-            <el-form-item prop="orderList" label="订单ID">
-                <el-select v-model="formData.orderList" placeholder="请选择待评价订单">
-                    <el-option v-for="item in formData.orderList" :key="item.orderId"
-                               :value="item.value">
+            <el-form-item  label="订单ID">
+                <el-select  v-model="orderid"  placeholder="请选择待评价订单">
+                    <el-option v-for="item in orderList"
+                               :key="item.orderId"
+                               :value="item.orderId">
                     </el-option>
                 </el-select>
             </el-form-item>
-            <el-form-item prop="level" label="编号">
+            <el-form-item prop="level" label="星级">
                 <el-input v-model="formData.level" size="small" placeholder="请填写星级"></el-input>
             </el-form-item>
           <el-form-item>
@@ -36,6 +37,7 @@
       visible: false,
       loadingStatus: false,
       dialogTitle: "",
+        orderid: "",
       formData:{
         apprId: null,
         content: "",
@@ -43,9 +45,9 @@
         createTime: "",
         updateTime: "",
         level: "",
-        status:"",
-        orderList: []
+        status:""
       },
+        orderList: []
     }
   },
     computed: {
@@ -57,7 +59,7 @@
         var phone = this.userInfo.phone
         getOrderListByPhone({phone: phone}).then(res => {
             console.log("chengong",res)
-            this.formData.orderList = res.result
+            this.orderList = res.result
             this.loadingStatus = false;
         }).catch(err => {
             this.loadingStatus = false
@@ -82,6 +84,8 @@
         if (vali) {
           var formData = this.formData;
           this.loadingStatus = true;
+          formData.orderId = this.orderid;
+          formData.createBy = this.userInfo.username
           if(formData.id){
             updateAppraise(formData).then(res => {
               this.loadingStatus = false;

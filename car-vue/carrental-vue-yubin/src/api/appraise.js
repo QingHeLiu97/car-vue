@@ -9,7 +9,7 @@ export const getAppraiseList = function (data) {
 }
 export const insetAppraise = function (data) {
     return request({
-        url: '/appraise/inserts',
+        url: '/appraise/insert',
         method: 'POST',
         params: data
     })

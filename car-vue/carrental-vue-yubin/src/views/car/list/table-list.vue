@@ -67,13 +67,13 @@
             // 获取数据u
             getData () {
                 var phone = this.userInfo.phone
-                this.roles = this.userInfo.role
-                console.log("phone",phone,this.roles)
+                var role = this.userInfo.role
+                console.log("phone",phone,this.role)
                 this.loadingStatus = true
                 var pageSize = this.pageSize
                 var current = this.currentPage
                 var formData = this.$parent.$refs.tableForm.formData;
-                getCarList({ formData }).then(res => {
+                getCarList({  role:role, ...formData }).then(res => {
                     console.log("成功", res)
                     this.tableData = res.result
                     this.loadingStatus = false

@@ -1,7 +1,7 @@
 <template>
   <el-card v-loading="loadingStatus" shadow="never">
     <div style="margin-bottom:20px">
-      <el-button type="primary" size="small" @click="handleCreate">新增订单</el-button>
+      <el-button type="primary" v-if="userInfo.role == 'admin'" size="small" @click="handleCreate">新增订单</el-button>
     </div>
     <el-table :data="tableData" border style="width: 100%" >
       <el-table-column header-align-="center" align="center" min-width="200" prop="orderId" label="编号"></el-table-column>
