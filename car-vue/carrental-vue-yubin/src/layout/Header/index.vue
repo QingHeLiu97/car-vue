@@ -16,7 +16,7 @@
                     <router-link style="text-decoration: none;" to="/system/userInfo">
                         <el-dropdown-item icon="el-icon-user">个人中心</el-dropdown-item>
                     </router-link>
-                    <el-dropdown-item icon="el-icon-edit" @click.native="handleUpDatePass">修改密码</el-dropdown-item>
+<!--                    <el-dropdown-item icon="el-icon-edit" @click.native="handleUpDatePass">修改密码</el-dropdown-item>-->
                     <el-dropdown-item icon="el-icon-switch-button" @click.native="handleLogout" divided>退出登录</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
@@ -29,15 +29,15 @@
             width="30%"
             :before-close="handleClose">
             <el-form :model="formData" :rules="formRule" size="small" ref="formData" label-width="80px" >
-                <el-form-item label="原密码" prop="oldPassword">
-                    <el-input type="password" placeholder="请输入密码" v-model="formData.oldPassword"></el-input>
-                </el-form-item>
-                <el-form-item label="密码" prop="password">
-                    <el-input type="password" placeholder="请输入密码" v-model="formData.password"></el-input>
-                </el-form-item>
-                <el-form-item label="确认密码" prop="passwordCheck">
-                    <el-input type="password" placeholder="请再次输入密码" v-model="formData.passwordCheck"></el-input>
-                </el-form-item>
+<!--                <el-form-item label="原密码" prop="oldPassword">-->
+<!--                    <el-input type="password" placeholder="请输入密码" v-model="formData.oldPassword"></el-input>-->
+<!--                </el-form-item>-->
+<!--                <el-form-item label="密码" prop="password">-->
+<!--                    <el-input type="password" placeholder="请输入密码" v-model="formData.password"></el-input>-->
+<!--                </el-form-item>-->
+<!--                <el-form-item label="确认密码" prop="passwordCheck">-->
+<!--                    <el-input type="password" placeholder="请再次输入密码" v-model="formData.passwordCheck"></el-input>-->
+<!--                </el-form-item>-->
                 <el-form-item>
                     <el-button type="primary" :loading="loadingStatus" @click="onSubmitForm('formData')">提交</el-button>
                     <el-button :disabled="loadingStatus" @click="onResetForm('formData')">重置</el-button>
