@@ -39,10 +39,19 @@ export default {
             component: () => import('@view/mycar/list')
         },
         {
-            path: 'appraise',
-            name: `${per}appraise`,
+            path: 'myappraise',
+            name: `${per}myappraise`,
             meta: {
                 title: '我的评价',
+                auth: true
+            },
+            component: () => import('@view/myappraise/list')
+        },
+        {
+            path: 'appraiseList',
+            name: `${per}appraiseList`,
+            meta: {
+                title: '所有评价',
                 auth: true
             },
             component: () => import('@view/appraise/list')

@@ -1,21 +1,22 @@
 <template>
   <el-card v-loading="loadingStatus" shadow="never">
-    <div style="margin-bottom:20px" v-if="userInfo.role =='user'">
-      <el-button type="primary" size="small" @click="handleCreate">新增评价</el-button>
-    </div>
+<!--    <div style="margin-bottom:20px" v-if="userInfo.role =='user'">-->
+<!--      <el-button type="primary" size="small" @click="handleCreate">新增评价</el-button>-->
+<!--    </div>-->
     <el-table :data="tableData" border style="width: 100%" >
       <el-table-column header-align-="center" align="center" min-width="100" prop="apprId" label="编号"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="200" prop="content" label="评价内容"></el-table-column>
+      <el-table-column header-align-="center" align="center" min-width="200" prop="createBy" label="评价内容"></el-table-column>
       <el-table-column v-if="userInfo.role == 'admin'" header-align-="center" align="center" min-width="100" prop="createBy" label="评价人"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="200" prop="createTime" label="创建时间"></el-table-column>
-      <el-table-column header-align-="center" align="center" min-width="200" prop="updateTime" label="更新时间"></el-table-column>
+      <el-table-column header-align-="center" v-if="userInfo.role == 'admin'" align="center" min-width="200" prop="updateTime" label="更新时间"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="100" prop="status" label="状态">
         <template slot-scope="{row}">
           <el-tag type="success" size="small" v-if="row.status == 0">正常</el-tag>
           <el-tag type="info" size="small" v-else>禁用</el-tag>
         </template>
       </el-table-column>
-      <el-table-column header-align="center" align="center" fixed="right"  width="250" label="操作">
+      <el-table-column header-align="center" v-if="userInfo.role == 'admin'" align="center" fixed="right"  width="250" label="操作">
         <template slot-scope="{row}">
              <el-button v-if="userInfo.role == 'user'" type="primary" size="small" @click="handleEdit(row)">编辑</el-button>
              <el-popconfirm placement="top" title="确定要删除这条数据吗" @confirm="handleDele(row)">
@@ -65,7 +66,7 @@
                 var phone = this.userInfo.phone
                 var role = this.userInfo.role
                 var formData = this.$parent.$refs.tableForm.formData;
-                getAppraiseList({ role: role,phone: phone , ...formData }).then(res => {
+                getAppraiseList({ role: role,phone: null , ...formData }).then(res => {
                     this.tableData = res.result
                     this.loadingStatus = false;
                 }).catch(err => {
@@ -78,7 +79,7 @@
             },
             // 编辑
             handleEdit (row) {
-                this.$refs.tableEdti.open(row, '编辑业主')
+                this.$refs.tableEdti.open(row, '编辑评价')
             },
             // 删除
             handleDele (row) {

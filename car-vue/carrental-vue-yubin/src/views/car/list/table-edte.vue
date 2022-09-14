@@ -1,22 +1,47 @@
 <template>
   <el-dialog v-dialogDrag :title="dialogTitle" :close-on-click-modal="false" width="30%" ref="dialogView" append-to-body :before-close="onBeforeClose" :visible.sync="visible">
-        <el-form :model="formData" ref="formData" :rules="formRule" label-width="100px">
-          <el-form-item prop="type" label="类型">
+        <el-form :model="formData"  ref="formData" :rules="formRule" label-width="100px">
+          <el-form-item  prop="type" label="类型">
             <el-input v-model="formData.type" size="small" placeholder="请填写类型"></el-input>
           </el-form-item>
-          <el-form-item prop="color" label="颜色">
+            <el-form-item  prop="carCircle"  label="上传图片">
+                <el-upload
+                    v-model = "formData.carCircle"
+                    ref="upload"
+                    action=""
+                    list-type="picture-card"
+                    :on-preview="handlePictureCardPreview"
+                    :on-remove="handleRemove"
+                    :on-change="UploadImage"
+                    :limit="1"
+                    :file-list="fileList"
+                    :auto-upload="false"
+                >
+                    <i class="el-icon-plus"></i>
+                    <template #tip>
+                        <div style="font-size: 12px;color: #919191;">
+                            限制上传一张图片
+                        </div>
+                    </template>
+                </el-upload>
+
+                <el-dialog v-model="dialogVisible" >
+                    <img style="width: 100%;height: 100%"  :src="formData.carCircle" alt="" />
+                </el-dialog>
+            </el-form-item>
+          <el-form-item  prop="color" label="颜色">
             <el-input v-model="formData.color" size="small" placeholder="请填写颜色"></el-input>
           </el-form-item>
-          <el-form-item prop="price" label="价格">
+          <el-form-item  prop="price" label="价格">
             <el-input v-model="formData.price" :maxlength="11" size="small" placeholder="请填写价格"></el-input>
           </el-form-item>
-          <el-form-item prop="deposit" label="押金">
+          <el-form-item  prop="deposit" label="押金">
             <el-input v-model="formData.deposit" size="small" placeholder="请填写押金"></el-input>
           </el-form-item>
-          <el-form-item prop="carname" label="车名">
+          <el-form-item  prop="carname" label="车名">
             <el-input v-model="formData.carname" size="small" placeholder="请填写车名"></el-input>
           </el-form-item>
-          <el-form-item prop="status" label="状态">
+          <el-form-item  prop="status" label="状态">
               <el-switch    v-model="formData.status"
                             class="switch"
                             active-value="1"
@@ -24,11 +49,11 @@
                             active-text="已出租"
                             inactive-text="未出租"></el-switch>
           </el-form-item>
-          <el-form-item>
+          <el-form-item >
                 <el-button type="primary" size="small" :loading="loadingStatus" @click="onSubmit" >提交</el-button>
                 <el-button type="default" size="small" :loading="loadingStatus" @click="$refs.dialogView.handleClose()">取消</el-button>
           </el-form-item>
-        </el-form>
+      </el-form>
   </el-dialog>
 </template>
 <script>
@@ -37,16 +62,21 @@ import {getCarList} from "../../../api/car";
 export default {
   data() {
     return {
-      data: {},
-      visible: false,
-      loadingStatus: false,
-      dialogTitle:"",
-      username: "",
+        fileList:[],
+        dialogVisible: false,
+        data: {},
+        isTrue: true ,
+        circleUrl: "",
+        visible: false,
+        loadingStatus: false,
+        dialogTitle:"",
+        username: "",
       formData:{
         carId:null,
         type:"",
         color:"",
         price:"",
+        carCircle: "",
         deposit:"",
         carname:"",
         status: "",
@@ -109,6 +139,9 @@ export default {
         }
       })
     },
+      swapImage(imgUrl){
+          return require('@/assets/' + imgUrl)
+      },
     // 弹窗关闭之前的回调函数
     onBeforeClose(deno) {
       this.formData.id = null;
@@ -117,6 +150,30 @@ export default {
         deno();
       })
     },
+      //上传图片的方法
+      UploadImage(file,filelist) {
+          console.log(file);
+          let fd = new FormData()
+          fd.append('file', file.raw) //传给后台接收的名字 file
+          this.$axios.post('/localhost/upload/image', fd, {headers: {'Content-Type': 'multipart/form-data'}}).then(response => {
+              //上传成功后返回的数据,
+              console.log("上传图片到:"+response.data);
+              // 将图片地址给到表单.
+              this.formData.carCircle = response.data
+          })
+
+      },
+      //移除图片功能
+      handleRemove(file, fileList) {
+          console.log(file, fileList)
+
+      },
+      //预览图片功能
+      handlePictureCardPreview(file) {
+          console.log(file.url);
+          this.dialogVisible = true
+          this.formData.carCircle = file.url
+      }
   }
 };
 </script>

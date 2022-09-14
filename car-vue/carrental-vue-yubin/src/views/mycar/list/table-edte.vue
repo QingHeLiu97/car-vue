@@ -2,7 +2,7 @@
   <el-dialog v-dialogDrag :title="dialogTitle" :close-on-click-modal="false" width="30%" ref="dialogView" append-to-body :before-close="onBeforeClose" :visible.sync="visible">
         <el-form :model="formData" ref="formData" :rules="formRule" label-width="100px">
           <el-form-item prop="type" label="类型">
-            <el-input v-model="formData.type" size="small" placeholder="请填写类型"></el-input>
+            <el-input v-model="formData.type" :readOnly="datastatus==2" size="small" placeholder="请填写类型"></el-input>
           </el-form-item>
           <el-form-item prop="carCircle" label="上传图片">
               <el-upload
@@ -20,7 +20,7 @@
                   <i class="el-icon-plus"></i>
                   <template #tip>
                       <div style="font-size: 12px;color: #919191;">
-                          单次限制上传一张图片
+                          限制上传一张图片
                       </div>
                   </template>
               </el-upload>
@@ -30,16 +30,16 @@
               </el-dialog>
           </el-form-item>
           <el-form-item prop="color" label="颜色">
-            <el-input v-model="formData.color" size="small" placeholder="请填写颜色"></el-input>
+            <el-input v-model="formData.color" :readOnly="datastatus==2" size="small" placeholder="请填写颜色"></el-input>
           </el-form-item>
           <el-form-item prop="price" label="价格">
-            <el-input v-model="formData.price" :maxlength="11" size="small" placeholder="请填写价格"></el-input>
+            <el-input v-model="formData.price"  :readOnly="datastatus==2":maxlength="11" size="small" placeholder="请填写价格"></el-input>
           </el-form-item>
           <el-form-item prop="deposit" label="押金">
-            <el-input v-model="formData.deposit" size="small" placeholder="请填写押金"></el-input>
+            <el-input v-model="formData.deposit" :readOnly="datastatus==2" size="small" placeholder="请填写押金"></el-input>
           </el-form-item>
           <el-form-item prop="carname" label="车名">
-            <el-input v-model="formData.carname" size="small" placeholder="请给你爱车起个名字"></el-input>
+            <el-input v-model="formData.carname" :readOnly="datastatus==2"size="small" placeholder="请给你爱车起个名字"></el-input>
           </el-form-item>
           <el-form-item prop="status" label="状态">
               <el-switch    v-model="formData.status"
@@ -71,6 +71,7 @@ export default {
       loadingStatus: false,
       dialogTitle:"",
       username: "",
+      datastatus: "",
       formData:{
         carId:null,
         type:"",
@@ -104,6 +105,8 @@ export default {
                     this.formData[key] = row[key]
                 }
             })
+            this.datastatus = row.status
+            console.log("datastatus",this.datastatus)
         }
     },
     // 提交的回调

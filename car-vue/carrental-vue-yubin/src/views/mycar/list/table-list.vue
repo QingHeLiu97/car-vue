@@ -3,10 +3,19 @@
     <div style="margin-bottom:20px">
       <el-button type="primary" size="small" @click="handleCreate">发布车源</el-button>
     </div>
+      <el-dialog :visible.sync="detailVisible" width="30%" hight="30%">
+          <!--        <template slot-scope="scope">-->
+          <el-image  :src="swapImage(carCircleUrl)" alt="" style="width: 100%;height: 100%" ></el-image>
+          <!--        </template>-->
+      </el-dialog>
     <el-table :data="tableData" border style="width: 100%" >
       <el-table-column header-align-="center" align="center" min-width="200" prop="carId" label="编号"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="200" prop="type" label="类型"></el-table-column>
-      <el-table-column header-align-="center" align="center" min-width="300" prop="carCircle" label="汽车图片"></el-table-column>
+      <el-table-column header-align-="center" align="center" min-width="300" prop="carCircle" label="汽车图片">
+          <template slot-scope="{row}" v-if="row.carCircle" >
+              <el-button   type="primary" size="small" @click="handlechecke(row)">查看图片</el-button>
+          </template>
+      </el-table-column>
       <el-table-column header-align-="center" align="center" min-width="100" prop="color" label="颜色"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="250" prop="userPhone" label="用户手机号码"></el-table-column>
       <el-table-column header-align-="center" align="center" min-width="150" prop="price" label="价格"></el-table-column>
@@ -23,6 +32,7 @@
       <el-table-column   header-align="center" align="center" fixed="right"  width="250" label="操作">
           <template slot-scope="{row}">
              <el-button type="primary" size="small" @click="handleEdit(row)">编辑</el-button>
+<!--             <el-button type="button" v-if="row.status !=0 " disable="true" size="small">暂不可修改</el-button>-->
              <el-popconfirm placement="top" title="确定要删除这条数据吗" @confirm="handleDele(row)">
               <el-button  v-if="row.status == 0" slot="reference" type="danger" size="small" style="margin-left:10px">删除</el-button>
              </el-popconfirm>
@@ -52,6 +62,8 @@
         components: { tableEdti },
         data () {
             return {
+                carCircleUrl: "",
+                detailVisible: false ,
                 loadingStatus: false, // 列表加载状态
                 tableData: [], // 列表数据
                 total: 0, // 总条数
@@ -80,11 +92,19 @@
                     this.loadingStatus = false
                 })
             },
+            swapImage(imgUrl){
+                return '../../' + imgUrl
+            },
             handleCreate () {
                 this.$refs.tableEdti.open(null, '发布车源')
             },
             handleEdit (row) {
                 this.$refs.tableEdti.open(row, '修改车辆信息')
+            },
+            handlechecke (row) {
+
+                this.detailVisible =true
+                this.carCircleUrl = row.carCircle
             },
             handleDele (row) {
                 deleteCar({ carId: row.carId }).then(res => {

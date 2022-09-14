@@ -32,3 +32,18 @@ export const updateCar = function (data) {
         params: data
     })
 }
+export const yuding = function (data) {
+    return request({
+        url: '/order/yuding',
+        method: 'POST',
+        params: data
+    })
+}
+export const unyuding = function (data) {
+    return request({
+        url: '/order/unyuding',
+        method: 'POST',
+        params: data
+    })
+}
+

@@ -1,6 +1,6 @@
 <template>
   <el-card v-loading="loadingStatus" shadow="never">
-    <div style="margin-bottom:20px">
+    <div style="margin-bottom:20px" v-if="userInfo.role=='admin'">
       <el-button type="primary" size="small" @click="handleCreate">新增公告</el-button>
     </div>
     <el-table :data="tableData" border style="width: 100%" >

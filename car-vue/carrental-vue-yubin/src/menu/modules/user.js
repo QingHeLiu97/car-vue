@@ -16,23 +16,37 @@ export default [
             {
                 id: 'user-mycar',
                 path: '/user/mycar',
-                role: 'admin',
+                role: 'user',
                 name: '我的车辆'
             },
             {
                 id: 'user-carList',
                 path: '/user/carList',
-                role: 'custom',
+                role: 'user',
                 name: '查看车源'
             }
         ]
     },
     {
-        id: 'user-appraise',
-        path: '/user/appraise',
+        id: 'user',
+        path: '/user',
         name: '我的评价',
         role: 'user',
-        icon: 'el-icon-star-on'
+        icon: 'el-icon-star-on',
+        children: [
+            {
+                id: 'user-myappraise',
+                path: '/user/myappraise',
+                role: 'user',
+                name: '我的评价'
+            },
+            {
+                id: 'user-appraiseList',
+                path: '/user/appraiseList',
+                role: 'user',
+                name: '所有评价'
+            }
+        ]
     },
     {
         id: 'user-order',

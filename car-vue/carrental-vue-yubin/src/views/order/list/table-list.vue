@@ -19,15 +19,18 @@
       <el-table-column header-align-="center" align="center" min-width="200" prop="createTime" label="创建时间"></el-table-column>
         <el-table-column header-align-="center" align="center" min-width="100" prop="status" label="状态">
         <template slot-scope="{row}">
-          <el-tag type="success" size="small" v-if="row.status == 0">正常</el-tag>
-          <el-tag type="info" size="small" v-else>已删除</el-tag>
+          <el-tag type="success" size="small" v-if="row.status == 0">预约</el-tag>
+          <el-tag type="info" size="small" v-if="row.status == 1">已删除</el-tag>
+          <el-tag type="success" size="small" v-if="row.status == 2">租赁中</el-tag>
+          <el-tag type="info" size="small" v-if="row.status == 3">已完成</el-tag>
         </template>
       </el-table-column>
-      <el-table-column header-align="center" align="center" fixed="right"  width="250" label="操作">
-        <template slot-scope="{row}">
-             <el-button type="primary" size="small" @click="handleEdit(row)">编辑</el-button>
-             <el-popconfirm placement="top" title="确定要删除这条数据吗" @confirm="handleDele(row)">
-              <el-button v-if="row.status == 0" slot="reference" type="danger" size="small" style="margin-left:10px">删除</el-button>
+      <el-table-column header-align="center"  align="center" fixed="right"  width="250" label="操作">
+        <template slot-scope="{row}" v-if="row.status !=3">
+             <el-button v-if="userInfo.role == 'admin'" type="primary" size="small" @click="handleEdit(row)">编辑</el-button>
+            <el-button v-if="row.status == 0 && userInfo.role == 'user'" type="primary" size="small" @click="handleUndingdan(row)">取消订单</el-button>
+            <el-popconfirm placement="top" title="确定要删除这条数据吗" @confirm="handleDele(row)">
+              <el-button v-if="row.status == 0 && userInfo.role == 'admin'" slot="reference" type="danger" size="small" style="margin-left:10px">删除</el-button>
              </el-popconfirm>
         </template>
       </el-table-column>
@@ -50,6 +53,7 @@
 <script>
     import tableEdti from './table-edte.vue'
     import {deleteOrder, getOrderList} from "../../../api/order";
+    import {unyuding} from "../../../api/car";
     import {mapState} from "vuex";
     export default {
         components: { tableEdti },
@@ -91,6 +95,13 @@
             },
             handleEdit (row) {
                 this.$refs.tableEdti.open(row, '修改订单信息')
+            },
+            handleUndingdan (row) {
+                unyuding({ carId:row.carId ,orderId: row.orderId }).then(res => {
+                    this.getData();
+                }).catch(err => {
+
+                })
             },
             handleDele (row) {
                 deleteOrder({ orderId: row.orderId }).then(res => {
